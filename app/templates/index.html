@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Index - Greeniversity{% endblock %}
+
+{% block maincontent %}
+<h2>Add as many <em>green</em> foods as you can!</h2>
+<p>We already have...</p>
+
+<ul>
+	{% for f in fruit %}
+	<li>{{f.name}} are {{f.color}}</li>
+	{% endfor %}
+</ul>
+
+<h2>Missing some fruits? Add them!</h2>
+<form action="" method="post" name="login">
+	<p>{{form.hidden_tag()}}</p>
+	{{form.name(size=20, placeholder="Name")}}
+	{{form.color(size=20, placeholder="Color")}}
+	<input type="submit" value="Add">
+	</p>
+</form>
+
+
+
+{{ super() }} <!-- Add flash messages -->
+{% endblock %}

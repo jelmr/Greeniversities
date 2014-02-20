@@ -11,3 +11,12 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)
+
+
+class Fruit(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(120), index = False, unique = False)
+    color = db.Column(db.String(120), index = False, unique = False)
+
+    def __repr__(self):
+        return '<%r are %r>' % (self.name, self.color)
