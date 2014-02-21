@@ -1,25 +1,23 @@
-from flask import render_template, flash, redirect
-from app import app, db, models
-from forms import LoginForm
+from flask import render_template
+
+from app import app, models
+from app.forms import SubmitFeedbackForm
 
 
-@app.route('/')
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-
-    fruit = models.Fruit.query.all()
-
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        u = models.Fruit(name=form.name.data, color=form.color.data)
-        db.session.add(u)
-        db.session.commit()
-        return redirect('/index')
-
-    return render_template("index.html", title='Home',  fruit=fruit, form=form)
+@app.route('/', methods=['GET'])
+@app.route('/university/<int:university_id>', methods=['GET'])
+def index(university_id=1):
+    university = models.University.query.get(university_id)
+    feedback_form = SubmitFeedbackForm()
+    return render_template("index.html", title='Home', university=university, form=feedback_form)
 
 
-@app.route('/css/style.css')
-def style():
-    return
+@app.route('/', methods=['POST'])
+@app.route('/university/<int:university_id>', methods=['POST'])
+def index_post():
+    pass
+
+
+@app.route('/admin', methods=['GET'])
+def admin():
+    pass

@@ -1,26 +1,28 @@
 {% extends "base.html" %}
-{% block title %}Index - Greeniversity{% endblock %}
+{% block title %}{{title}} - Greeniversity{% endblock %}
 
 {% block maincontent %}
-<h2>Add as many <em>green</em> foods as you can!</h2>
-<p>We already have...</p>
 
-<ul>
-	{% for f in fruit %}
-	<li>{{f.name}} are {{f.color}}</li>
-	{% endfor %}
-</ul>
 
-<h2>Missing some fruits? Add them!</h2>
-<form action="" method="post" name="login">
-	<p>{{form.hidden_tag()}}</p>
-	{{form.name(size=20, placeholder="Name")}}
-	{{form.color(size=20, placeholder="Color")}}
-	<input type="submit" value="Add">
-	</p>
+<h1>{{ university.name }}</h1>
+<p>{{ university.description }}</p>
+
+<h2>Feedback</h2>
+
+{% for post in university.feedback %}
+
+		<p><em>{{ post.name }}</em></p>
+		<p>{{ post.body }}</p>
+		<p>{{ post.timestamp.strftime("%H:%M - %d %B %Y")}}</p>
+
+{% endfor %}
+
+<form action="" method="POST">
+	<p>{{form.name(size=20, placeholder="Name")}}</p>
+	<p>{{form.feedback(placeholder="Feedback")}}</p>
+	<input type="submit" value="Post feedback">
+
 </form>
-
-
 
 {{ super() }} <!-- Add flash messages -->
 {% endblock %}

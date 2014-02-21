@@ -1,22 +1,40 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import db
+
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    nickname = db.Column(db.String(64), index = True, unique = True)
-    email = db.Column(db.String(120), index = True, unique = True)
-    role = db.Column(db.SmallInteger, default = ROLE_USER)
+
+class University(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
+    pw_hash = db.Column(db.String)
+    description = db.Column(db.String(2000))
+    location = db.Column(db.String)
+    feedback = db.relationship('Feedback', backref='university', lazy='dynamic')
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
+        return 'Bla bla %r' % self.name
+
+    def set_password(self, password):
+        self.pw_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.pw_hash, password)
+
+    def get_score(self):
+        return 9
 
 
-class Fruit(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(120), index = False, unique = False)
-    color = db.Column(db.String(120), index = False, unique = False)
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=True)
+    body = db.Column(db.String)
+    rating = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime)
+    university_id = db.Column(db.Integer, db.ForeignKey('university.id'))
 
-    def __repr__(self):
-        return '<%r are %r>' % (self.name, self.color)
+
