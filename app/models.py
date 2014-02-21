@@ -34,7 +34,7 @@ class Feedback(db.Model):
     name = db.Column(db.String, nullable=True)
     body = db.Column(db.String)
     rating = db.Column(db.Integer)
-    timestamp = db.Column(db.DateTime)
+    timestamp = db.Column(db.DateTime, default=db.func.now())
     university_id = db.Column(db.Integer, db.ForeignKey('university.id'))
 
 

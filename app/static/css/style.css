@@ -1,0 +1,26 @@
+.feedback-post {
+  display: block;
+  width: 90%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.feedback-post .remove {
+  color: red;
+  font-size: 80%;
+}
+.feedback-post .remove:hover {
+  color: red;
+  text-decoration: none;
+}
+.feedback-post .author {
+  font-weight: bold;
+  font-style: italic;
+}
+.feedback-post .date {
+  font-size: 60%;
+}
