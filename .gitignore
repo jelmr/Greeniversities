@@ -36,3 +36,6 @@ nosetests.xml
 .pydevproject
 
 flask/
+venv/
+app.db
+db_repository
