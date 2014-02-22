@@ -2,3 +2,7 @@
 <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{
         value|e }}" size="{{ size }}">
 {%- endmacro %}
+
+{% macro active(target_id, current_id) -%}
+{% if target_id == current_id %}class="active"{% endif %}
+{%- endmacro %}

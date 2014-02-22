@@ -1,10 +1,9 @@
 .feedback-post {
   display: block;
-  width: 90%;
+  width: 100%;
   height: auto;
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin: 10px;
+  margin: 10px 0 10px 0;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -12,15 +11,71 @@
 .feedback-post .remove {
   color: red;
   font-size: 80%;
+  float: right;
 }
 .feedback-post .remove:hover {
   color: red;
   text-decoration: none;
 }
-.feedback-post .author {
+.feedback-post .header {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0 10px 0 10px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.feedback-post .header .author {
+  font-size: 1em;
   font-weight: bold;
+}
+.feedback-post .header .date {
+  font-size: 0.6em;
   font-style: italic;
 }
+.feedback-post .body {
+  padding: 0 10px 0 10px;
+}
 .feedback-post .date {
-  font-size: 60%;
+  font-size: 0.6em;
+}
+.university {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.university .title {
+  background: #4c8c1d;
+  font-size: 1em;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0 10px 0 10px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.university .title a:active,
+.university .title a:visited,
+.university .title a:hover {
+  color: #eee !important;
+}
+.university .description {
+  font-size: 0.7em;
+  padding: 10px;
+}
+.search-bar {
+  width: 250px;
 }

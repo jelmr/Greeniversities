@@ -1,34 +1,9 @@
 {% extends "base.html" %}
-{% block title %}{{title}} - Greeniversity{% endblock %}
-
 {% block maincontent %}
 
 
-<h1>{{ university.name }}</h1>
-<p>{{ university.description }}</p>
+<h1>Home</h1>
 
-<h2>Feedback</h2>
 
-<div id="posts">
-{% for post in university.feedback | reverse %}
-
-	 <div class="feedback-post" id="{{ post.id }}">
-		<p class="author">{{ post.name }}</p>
-		<p class="body">{{ post.body }}</p>
-		<p class="date">{{ post.timestamp.strftime("%H:%M - %d %B %Y")}}</p>
-	 	<a class="remove" href="/feedback/{{ post.id }}" >X</a>
-
-	  </div>
-{% endfor %}
-</div>
-
-<form action="" method="POST">
-	<p>{{form.hidden_tag()}}</p>
-	<p>{{form.name(size=20, placeholder="Name")}}</p>
-	<p>{{form.feedback(placeholder="Feedback")}}</p>
-	<input id="add_feedback_submit" type="submit" value="Post feedback">
-
-</form>
-
-{{ super() }} <!-- Add flash messages -->
+	{{ super() }} <!-- Add flash messages -->
 {% endblock %}

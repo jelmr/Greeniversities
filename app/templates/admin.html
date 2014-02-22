@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+	<h1>Admin page</h1>
+	<h3>Universities</h3>
+	<ul>
+		{% for university in universities %}
+			{{ university.name }}
+		{% endfor %}
+	</ul>
+
+
+	{{ super() }} <!-- Add flash messages -->
+{% endblock %}

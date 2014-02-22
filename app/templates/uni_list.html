@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+	<h1>Universities</h1>
+	{% for university in universities %}
+
+		<div class="university">
+			<div class="title">
+				<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
+			</div>
+			<div class="description">
+				{{ university.description }}
+			</div>
+		</div>
+
+	{% endfor %}
+
+
+	{{ super() }} <!-- Add flash messages -->
+{% endblock %}

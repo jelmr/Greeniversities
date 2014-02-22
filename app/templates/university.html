@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+<h1>{{ university.name }}</h1>
+<p>{{ university.description }}</p>
+
+<h2>Feedback</h2>
+
+<div id="posts">
+{% for post in university.feedback | reverse %}
+	{% include 'post.html' %}
+{% endfor %}
+</div>
+
+
+<form action="" method="POST" id="feedback_form">
+	<p>{{form.hidden_tag()}}</p>
+	<p>{{form.name(size=20, placeholder="Name")}}</p>
+	<p>{{form.feedback(placeholder="Feedback")}}</p>
+	<input id="submit_feedback" type="submit" onclick="submit_feedback_form('#feedback_form','{{ university.id }}')">
+</form>
+
+{{ super() }} <!-- Add flash messages -->
+{% endblock %}

@@ -1,17 +1,17 @@
 .feedback-post {
   display: block;
-  width:90%;
-  height:auto;
-  background-color:rgba(0,0,0,0.2);
-  padding:10px;
-  margin:10px;
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 10px 0 10px 0;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 
   .remove {
     color: red;
-    font-size:80%;
+    font-size: 80%;
+    float: right;
 
     &:hover {
       color: red;
@@ -20,13 +20,81 @@
 
   }
 
-  .author {
-    font-weight: bold;
-    font-style: italic;
+  .header {
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0 10px 0 10px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    .author {
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    .date {
+      font-size: 0.6em;
+      font-style: italic;
+    }
+  }
+
+  .body {
+    padding:0 10px 0 10px;
   }
 
   .date {
-    font-size: 60%;
+    font-size: 0.6em;
   }
 
+}
+
+.university {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  .title {
+    background: #4c8c1d;
+
+    font-size: 1em;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0 10px 0 10px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    a {
+      &:active, &:visited, &:hover {
+        color:#eee !important;
+      }
+    }
+  }
+
+  .description {
+    font-size: 0.7em;
+    padding:10px;
+  }
+}
+
+
+.search-bar {
+  width:250px;
 }

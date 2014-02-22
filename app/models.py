@@ -37,4 +37,18 @@ class Feedback(db.Model):
     timestamp = db.Column(db.DateTime, default=db.func.now())
     university_id = db.Column(db.Integer, db.ForeignKey('university.id'))
 
+    @staticmethod
+    def save_feedback(name, body, rating, university_id):
+        university = University.query.get(university_id)
+        feedback = Feedback(name=name, body=body, rating=rating, university=university)
+        db.session.add(feedback)
+        db.session.commit()
+        return feedback
 
+    @staticmethod
+    def delete_feedback(feedback_id):
+        post = Feedback.query.get(feedback_id)
+        db.session.delete(post)
+        db.session.commit()
+
+#
