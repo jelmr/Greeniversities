@@ -16,6 +16,9 @@ class University(db.Model):
     location = db.Column(db.String)
     feedback = db.relationship('Feedback', backref='university', lazy='dynamic')
 
+    def __init__(self, name, username, password, description, location):
+        self.update(name, username, password, description, location)
+
     def __repr__(self):
         return 'Bla bla %r' % self.name
 
@@ -27,6 +30,20 @@ class University(db.Model):
 
     def get_score(self):
         return 9
+
+    def update(self, name, username, password, description, location):
+        self.name = name
+        self.username = username
+        self.set_password(password)
+        self.description = description
+        self.location = location
+        db.session.commit()
+
+    @staticmethod
+    def delete_university(university_id):
+        university = University.query.get(university_id)
+        db.session.delete(university)
+        db.session.commit()
 
 
 class Feedback(db.Model):

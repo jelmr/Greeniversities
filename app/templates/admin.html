@@ -6,10 +6,17 @@
 	<h3>Universities</h3>
 	<ul>
 		{% for university in universities %}
-			{{ university.name }}
+			<li>
+				<a href="{{ url_for('edit_university', university_id=university.id) }}">{{ university.name }}</a>
+			</li>
 		{% endfor %}
 	</ul>
 
+	<a href="/add/university">
+		<button id="add_university"  type="button" class="btn btn-primary btn-sm">
+			<span class="glyphicon glyphicon-plus"></span> Add university
+		</button>
+	</a>
 
 	{{ super() }} <!-- Add flash messages -->
 {% endblock %}

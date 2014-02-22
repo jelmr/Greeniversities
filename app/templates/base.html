@@ -20,6 +20,19 @@
 	<script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<div class="flash_message">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+
+
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
 	your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
@@ -33,7 +46,8 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li {{ m.active('home', page_id) }}><a href="/">Home</a></li>
-				<li {{ m.active('universities', page_id) }}><a href="{{ url_for('list_universities') }}">Universities</a></li>
+				<li {{ m.active('universities', page_id) }}><a
+						href="{{ url_for('list_universities') }}">Universities</a></li>
 				<li {{ m.active('admin', page_id) }}><a href="{{ url_for('admin') }}">Admin</a></li>
 
 			</ul>
@@ -54,27 +68,19 @@
 	</div>
 </div>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-	<div class="container">
+<div style="height:50px;"></div>
+<!--spaces nav bar -->
+<div style="height:20px;"></div>
+<!--padding nav bar -->
+<div class="container">
+
+	{% block maincontent %}
+
+	{% endblock %}
 
 
-		{% block maincontent %}
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<ul>
-						{% for message in messages %}
-							<li>{{ message }}</li>
-						{% endfor %}
-					</ul>
-				{% endif %}
-			{% endwith %}
-			{% block content %}{% endblock %}
-		{% endblock %}
-
-
-	</div>
 </div>
+
 
 <div class="container">
 	<!-- Example row of columns -->
