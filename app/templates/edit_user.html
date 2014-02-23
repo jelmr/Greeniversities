@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+	<legend>Edit user</legend>
+
+
+	<form method="post" action="" class="form-horizontal" role="form">
+		{{ form.hidden_tag() }}
+		{{ m.render_field(form.username, 4, value=user.username) }}
+		{{ m.render_field(form.mail, 4, value=user.mail) }}
+		{{ m.render_field(form.pw, 4) }}
+		{{ m.render_field(form.confirmpw, 4) }}
+		{{ m.render_field(form.role, 4, selected=user.role) }}
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-4">
+				<button type="submit" class="btn btn-primary col-sm-6">
+					<span class="glyphicon glyphicon-ok"></span>
+					Save changes
+				</button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-4">
+				<a href="{{ url_for('delete_user', user_id=user.id) }}">
+					<button type="button" class="btn btn-danger col-sm-6">
+						<span class="glyphicon glyphicon-trash"></span>
+						Remove user
+					</button>
+				</a>
+			</div>
+		</div>
+
+
+	</form>
+
+
+
+
+
+
+
+
+	{{ super() }} <!-- Add flash messages -->
+{% endblock %}

@@ -2,22 +2,20 @@
 {% block maincontent %}
 
 
-	<legend>Add university</legend>
+	<legend>Add user</legend>
 
 
 	<form method="post" action="" class="form-horizontal" role="form">
 		{{ form.hidden_tag() }}
 		{{ m.render_field(form.username, 4) }}
+		{{ m.render_field(form.mail, 4) }}
 		{{ m.render_field(form.pw, 4) }}
 		{{ m.render_field(form.confirmpw, 4) }}
-		{{ m.render_field(form.name, 4) }}
-		{{ m.render_field(form.location, 4) }}
-		{{ m.render_field(form.description, 7, rows=6) }}
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-4">
 				<button type="submit" class="btn btn-primary col-sm-6">
 					<span class="glyphicon glyphicon-ok"></span>
-					Add university
+					Add user
 				</button>
 			</div>
 		</div>

@@ -1,8 +1,8 @@
 <div class="feedback-post" id="{{ post.id }}">
 	<div class="header">
 		<span class="author">{{ post.name }}</span>
-		<a class="remove" href="/delete/feedback/{{ post.id }}" onclick="delete_feedback({{ post.id }})" >X</a>
-		<span class="date">({{ post.timestamp.strftime("%H:%M:%S - %d %B %Y")}})</span>
+		<a class="remove" href="/delete/feedback/{{ post.id }}" onclick="delete_feedback({{ post.id }})" >&times;</a>
+		<span class="date">({{ post.timestamp.strftime("%d %B %Y, %H:%M")}})</span>
 	</div>
 	<p class="body">{{ post.body }}</p>
 

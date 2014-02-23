@@ -1,24 +1,32 @@
 {% extends "base.html" %}
 {% block maincontent %}
 
-<legend>{{ university.name }} - <span class="location">{{ university.location }}</span></legend>
-<p>{{ university.description }}</p>
+	<legend><span class="university-title">{{ university.name }}</span> - <span
+			class="location-title">{{ university.location }}</span></legend>
+	<p>{{ university.description }}</p>
 
-<h2>Feedback</h2>
+	<h2>Feedback</h2>
 
-<div id="posts">
-{% for post in university.feedback | reverse %}
-	{% include 'post.html' %}
-{% endfor %}
-</div>
+	<div id="posts">
+		{% for post in university.feedback | reverse %}
+			{% include 'post.html' %}
+		{% endfor %}
+	</div>
 
 
-<form action="" method="POST" id="feedback_form">
-	<p>{{form.hidden_tag()}}</p>
-	<p>{{form.name(size=20, placeholder="Name")}}</p>
-	<p>{{form.feedback(placeholder="Feedback")}}</p>
-	<input id="submit_feedback" type="submit" onclick="submit_feedback_form('#feedback_form','{{ university.id }}')">
-</form>
+	<form class="form" action="" method="POST" id="feedback_form">
 
-{{ super() }} <!-- Add flash messages -->
+		<legend>Submit feedback</legend>
+
+		<p>{{ form.hidden_tag() }}</p>
+		<p>{{ m.render_field_reg(form.name,"Name",3) }}</p>
+		<p>{{ m.render_field_reg(form.feedback,"Feedback",4, rows=4) }}</p>
+
+
+		<input id="submit_feedback" class="left clear" type="submit"
+			   onclick="submit_feedback_form('#feedback_form','{{ university.id }}')">
+
+	</form>
+
+	{{ super() }} <!-- Add flash messages -->
 {% endblock %}

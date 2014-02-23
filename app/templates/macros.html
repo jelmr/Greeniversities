@@ -1,29 +1,52 @@
 
 
 {% macro active(target_id, current_id) -%}
-{% if target_id == current_id %}class="active"{% endif %}
+	{% if target_id == current_id %}class="active"{% endif %}
 {%- endmacro %}
 
 
-{% macro render_field(field, name, size) %}
+{% macro render_field(field, size) %}
 	<div class="form-group {% if field.errors %} has-error {% endif %}">
-		<label class="col-sm-3 control-label" for="{{ field.id }}">{{ name }}</label>
+		<label class="col-sm-3 control-label" for="{{ field.id }}">{{ field.label.text }}</label>
 
 
 		<div class="col-sm-{{ size }}">
-			{{ field(class="form-control", placeholder=name,**kwargs)|safe }}
+			{{ field(class="form-control", placeholder=field.label.text,**kwargs)|safe }}
 		</div>
 
 		{% if field.errors %}
 
-				{% for error in field.errors %}
-					<label class="col-sm-3 control-label" style="text-align: left;" for="{{ field.id }}">{{ error }}</label>
-				{% endfor %}
+			{% for error in field.errors %}
+				<label class="col-sm-3 control-label" style="text-align: left;" for="{{ field.id }}">{{ error }}</label>
+			{% endfor %}
 
 		{% endif %}
 
 	</div>
 {% endmacro %}
+
+
+{% macro render_field_reg(field, size) %}
+	<div class="col-sm-3 clear" >
+		<div class="form-group {% if field.errors %} has-error {% endif %} ">
+			<label class="col-sm-3 control-label" for="{{ field.id }}">{{ field.label.text }}</label>
+
+			{{ field(class="form-control", placeholder=field.label.text,**kwargs)|safe }}
+
+			{% if field.errors %}
+
+				{% for error in field.errors %}
+					<label class="col-sm-3 control-label" style="text-align: left;"
+						   for="{{ field.id }}">{{ error }}</label>
+				{% endfor %}
+
+			{% endif %}
+		</div>
+	</div>
+{% endmacro %}
+
+
+
 
 
 

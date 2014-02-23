@@ -21,17 +21,6 @@
 </head>
 <body>
 
-{% with messages = get_flashed_messages() %}
-	{% if messages %}
-		{% for message in messages %}
-			<div class="flash_message">
-				{{ message }}
-			</div>
-		{% endfor %}
-	{% endif %}
-{% endwith %}
-{% block content %}{% endblock %}
-
 
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -67,12 +56,26 @@
 		</div>
 	</div>
 </div>
-
 <div style="height:50px;"></div>
-<!--spaces nav bar -->
-<div style="height:20px;"></div>
-<!--padding nav bar -->
+
 <div class="container">
+
+	<!--padding nav bar -->
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category,message in messages %}
+				{% if category == "message" %} {% set category = "info" %}{% endif %}
+
+				<div class="alert alert-{{ category }} alert-dismissable" style="margin:15px 0 -15px 0;">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong>Note!</strong> {{ message }}
+				</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	{% block content %}{% endblock %}
+
+	<div style="height:20px;"></div>
 
 	{% block maincontent %}
 
@@ -89,7 +92,7 @@
 	<hr>
 
 	<footer>
-		<p>&copy; Greeniversity 2014</p>
+		<p>&copy; Greeniversity 2014 - <a href="/login">Login</a> - <a href="/logout">Logout</a></p>
 	</footer>
 </div>
 <!-- /container -->

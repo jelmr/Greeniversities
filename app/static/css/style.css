@@ -13,12 +13,12 @@ html {
   border-radius: 5px;
 }
 .feedback-post .remove {
-  color: red;
-  font-size: 80%;
+  color: #62160d;
+  font-size: 1.2em;
   float: right;
 }
 .feedback-post .remove:hover {
-  color: red;
+  color: #62160d;
   text-decoration: none;
 }
 .feedback-post .header {
@@ -35,18 +35,16 @@ html {
   border-top-right-radius: 5px;
 }
 .feedback-post .header .author {
-  font-size: 1em;
+  font-size: 1.3em;
   font-weight: bold;
 }
 .feedback-post .header .date {
-  font-size: 0.6em;
+  font-size: 1em;
   font-style: italic;
 }
 .feedback-post .body {
   padding: 0 10px 0 10px;
-}
-.feedback-post .date {
-  font-size: 0.6em;
+  font-size: 1.2em;
 }
 .university {
   display: block;
@@ -82,11 +80,11 @@ html {
   font-size: 1.1em;
   padding: 10px;
 }
-legend {
+legend .university-title {
   font-size: 2.5em;
 }
-legend .location {
-  font-size: 0.8em;
+legend .location-title {
+  font-size: 1.5em;
   font-style: italic;
 }
 .flash_message {
@@ -98,4 +96,13 @@ legend .location {
 }
 .search-bar {
   width: 250px;
+}
+.clear {
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
