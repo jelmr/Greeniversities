@@ -2,7 +2,20 @@
 {% block maincontent %}
 
 
-	<h1>Welcome, {{ user.name }} <a href="/logout" class="logout">(logout)</a> </h1>
+	<h1>Welcome, {{ u.name }} <a href="/logout" class="logout">(logout)</a> </h1>
+
+	<br />
+	<legend>Personal information <a class="edit pull-right" href="/edit/user/{{ u.id }}">edit</a></legend>
+{#	<div class="well well-sm">#}
+		<dl class="dl-horizontal">
+			<dt>Name</dt><dd>{{ u.name }}</dd>
+			<dt>Surname</dt><dd>{{ u.surname }}</dd>
+			<dt>Mail</dt><dd>{{ u.mail }}</dd>
+			<dt>Password</dt><dd>**********</dd>
+		</dl>
+{#	</div>#}
+	<hr>
+
 	<legend>Universities</legend>
 	<div class="well well-sm">
 		<div class="panel panel-default">
@@ -23,19 +36,20 @@
 	</div>
 
 
+
 	<legend>Users</legend>
 	<div class="well well-sm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<strong>Admin</strong>
-				<span class="pull-right"><a href="/add/user/2"><span class="glyphicon glyphicon-plus"></span> Add admin</a></span>
+				<span class="pull-right"><a href="{{ url_for("add_user", role=2) }}"><span class="glyphicon glyphicon-plus"></span> Add admin</a></span>
 			</div>
 			<div class="panel-body">
 				<ul>
 					{% for user in users %}
 						{% if user.role == 2 %}
 							<li>
-								<a href="{{ url_for('edit_user', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
+								<a href="{{ url_for('edit_user_admin', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
 								<em>({{ user.mail }})</em>
 							</li>
 						{% endif %}
@@ -47,14 +61,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<strong>University</strong>
-				<span class="pull-right"><a href="/add/user/1"><span class="glyphicon glyphicon-plus"></span> Add university</a></span>
+				<span class="pull-right"><a href="{{ url_for("add_user", role=1) }}"><span class="glyphicon glyphicon-plus"></span> Add university</a></span>
 			</div>
 			<div class="panel-body">
 				<ul>
 					{% for user in users %}
 						{% if user.role == 1 %}
 							<li>
-								<a href="{{ url_for('edit_user', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
+								<a href="{{ url_for('edit_user_admin', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
 								<em>({{ user.mail }})</em>
 							</li>
 						{% endif %}
@@ -66,14 +80,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<strong>User</strong>
-				<span class="pull-right"><a href="/add/user/0"><span class="glyphicon glyphicon-plus"></span> Add user</a></span>
+				<span class="pull-right"><a href="{{ url_for("add_user", role=0) }}"><span class="glyphicon glyphicon-plus"></span> Add user</a></span>
 			</div>
 			<div class="panel-body">
 				<ul>
 					{% for user in users %}
 						{% if user.role == 0 %}
 							<li>
-								<a href="{{ url_for('edit_user', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
+								<a href="{{ url_for('edit_user_admin', user_id=user.id) }}">{{ user.name }} {{ user.surname }}</a>
 								<em>({{ user.mail }})</em>
 							</li>
 						{% endif %}

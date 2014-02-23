@@ -3,7 +3,8 @@ from flask.ext.login import login_user, logout_user, login_required, current_use
 import flask_sijax
 
 from app import app, models, db, lm
-from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm, AddUserForm, ManageUserForm, LoginForm
+from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm, AddUserForm, ManageUserForm, LoginForm, \
+    AdminManageUserForm
 
 
 
@@ -14,17 +15,17 @@ from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm,
 ## HOME
 @flask_sijax.route(app, "/")
 def home():
-    return render_template('index.html', page_id="home", title="Home")
+    return render_template('index.html', page_id="home", title="Home", u=g.user)
 
 #======================================== ADMIN =======================================#
 
-## ADMIN
+## ADMIN PAGE
 @flask_sijax.route(app, "/admin/")
 @login_required
 def admin():
     universities = models.University.query.all()
     users = models.User.query.all()
-    return render_template("admin.html", user=g.user, page_id="admin", title="Administrator", universities=universities, users=users)
+    return render_template("admin.html", page_id="admin", title="Administrator", universities=universities, users=users, u=g.user)
 
 ## LOGIN
 @flask_sijax.route(app, "/login")
@@ -40,7 +41,7 @@ def login():
             login_user(user)
             return redirect(request.args.get("next") or url_for("admin"))
         flash("Invalid login combination.", "danger")
-    return render_template('login.html', page_id="admin", title="Login", form=form)
+    return render_template('login.html', page_id="admin", title="Login", form=form, u=g.user)
 
 ## LOGOUT
 @flask_sijax.route(app, "/logout")
@@ -48,13 +49,35 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+## EDIT USER
+@flask_sijax.route(app, "/admin/edit/user/<int:user_id>")
+@login_required
+def edit_user_admin(user_id):
+    user = models.User.query.get(user_id)
+    form = AdminManageUserForm(role=user.role)
+    if form.validate_on_submit():
+        user.name = form.name.data
+        user.surname = form.surname.data
+        user.mail = form.mail.data
+        user.role = int(form.role.data)
+
+        pw = form.pw.data
+        if pw != "":
+            user.set_password(pw)
+
+        db.session.commit()
+        flash("Changes to user %r have been saved!" % str(form.name.data+" "+form.surname.data), "success")
+        return redirect(url_for('admin'))
+
+    return render_template("edit_user.html", page_id="admin", title="Edit - %s %s" % (user.name, user.surname), user=user, form=form, u=g.user)
+
 #==================================== UNIVERSITY =====================================#
 
 ## UNIVERSITIES
 @flask_sijax.route(app, "/universities/")
 def list_universities():
     universities = models.University.query.all()
-    return render_template('uni_list.html', universities=universities, page_id="universities", title="Universities")
+    return render_template('uni_list.html', universities=universities, page_id="universities", title="Universities", u=g.user)
 
 ## ADD UNIVERSITY
 @flask_sijax.route(app, "/add/university")
@@ -76,7 +99,7 @@ def add_university():
         flash("The university %r has been created!" % str(name), "success")
         return redirect(url_for('admin'))
 
-    return render_template("add_university.html", page_id="admin", title="New university", form=form)
+    return render_template("add_university.html", page_id="admin", title="New university", form=form, u=g.user)
 
 
 ## EDIT UNIVERSITY
@@ -100,7 +123,7 @@ def edit_university(university_id):
 
     form.description.data = university.description
     return render_template("edit_university.html", page_id="admin", title="Edit - " + university.name,
-                           university=university, form=form)
+                           university=university, form=form, u=g.user)
 
 
 ## VIEW SPECIFIC UNIVERSITY
@@ -118,7 +141,7 @@ def university(university_id=1):
         models.Feedback.save_feedback(form.name.data, form.feedback.data, 5, university_id)
 
     return render_template("university.html", university=university, form=form, page_id="universities",
-                           title=university.name + " - Universities")
+                           title=university.name + " - Universities", u=g.user)
 
 
 ## DELETE UNIVERSITY
@@ -161,7 +184,7 @@ def add_user(role=0):
         flash("The user %r has been created!" % str(name+' '+surname), "success")
         return redirect(url_for('admin'))
 
-    return render_template("add_user.html", page_id="admin", title="New user", form=form)
+    return render_template("add_user.html", page_id="admin", title="New user", form=form, u=g.user)
 
 ## EDIT USER
 @flask_sijax.route(app, "/edit/user/<int:user_id>")
@@ -173,7 +196,6 @@ def edit_user(user_id):
         user.name = form.name.data
         user.surname = form.surname.data
         user.mail = form.mail.data
-        user.role = int(form.role.data)
 
         pw = form.pw.data
         if pw != "":
@@ -184,7 +206,7 @@ def edit_user(user_id):
         return redirect(url_for('admin'))
 
     return render_template("edit_user.html", page_id="admin", title="Edit - " + user.mail,
-                           user=user, form=form)
+                           user=user, form=form, u=g.user)
 
 ## DELETE USER
 @flask_sijax.route(app, "/delete/user/<int:user_id>")

@@ -45,6 +45,9 @@ class AddUserForm(ChangeUserPassword, ChangeUserInfo):
 class ManageUserForm(AddUserForm):
     pw = PasswordField('New Password', [EqualTo('confirmpw', message='Passwords must match')])
     confirmpw = PasswordField('Repeat Password')
+
+
+class AdminManageUserForm(ManageUserForm):
     role = SelectField('Role', choices=[(str(models.ROLE_USER), 'User'), (str(models.ROLE_UNIVERSITY), 'University'), (str(models.ROLE_ADMIN), 'Admin')])
 
 

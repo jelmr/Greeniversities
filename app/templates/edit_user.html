@@ -12,7 +12,9 @@
 		{{ m.render_field(form.mail, 4, value=user.mail) }}
 		{{ m.render_field(form.pw, 4) }}
 		{{ m.render_field(form.confirmpw, 4) }}
-		{{ m.render_field(form.role, 4, selected=user.role) }}
+		{% if form.role %}
+			{{ m.render_field(form.role, 4, selected=user.role) }}
+		{% endif %}
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-4">
 				<button type="submit" class="btn btn-primary col-sm-6">

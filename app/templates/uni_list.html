@@ -3,19 +3,20 @@
 
 
 	<h1>Universities</h1>
+	<div class="well well-sm">
 	{% for university in universities %}
 
-		<div class="university">
-			<div class="title">
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
 			</div>
-			<div class="description">
+			<div class="panel-body">
 				{{ university.description }}
 			</div>
 		</div>
 
 	{% endfor %}
-
+	</div>
 
 	{{ super() }} <!-- Add flash messages -->
 {% endblock %}
