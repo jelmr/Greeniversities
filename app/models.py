@@ -73,13 +73,15 @@ class Feedback(db.Model):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True)
+    name = db.Column(db.String)
+    surname = db.Column(db.String)
     pw_hash = db.Column(db.String)
     mail = db.Column(db.String(120), unique=True)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
 
-    def __init__(self, username, password, mail, role=ROLE_USER):
-        self.username = username
+    def __init__(self, name, surname, password, mail, role=ROLE_USER):
+        self.name = name
+        self.surname = surname
         self.set_password(password)
         self.mail = mail
         self.role = role

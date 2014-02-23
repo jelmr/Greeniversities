@@ -19,8 +19,8 @@
 		<legend>Submit feedback</legend>
 
 		<p>{{ form.hidden_tag() }}</p>
-		<p>{{ m.render_field_reg(form.name,"Name",3) }}</p>
-		<p>{{ m.render_field_reg(form.feedback,"Feedback",4, rows=4) }}</p>
+		<p>{{ m.render_field_reg(form.name,3) }}</p>
+		<p>{{ m.render_field_reg(form.feedback,4, rows=4) }}</p>
 
 
 		<input id="submit_feedback" class="left clear" type="submit"

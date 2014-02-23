@@ -106,3 +106,6 @@ legend .location-title {
 .right {
   float: right;
 }
+a.logout {
+  font-size: 0.6em;
+}

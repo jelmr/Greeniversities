@@ -28,7 +28,8 @@ class AddUniversityForm(EditUniversityForm):
 #======================================== USER ========================================#
 
 class ChangeUserInfo(Form):
-    username = TextField('Name', validators=[Required()])
+    name = TextField('Name', validators=[Required()])
+    surname = TextField('Surname', validators=[Required()])
     mail = TextField('Mail', validators=[Required(), Email()])
 
 
@@ -50,5 +51,5 @@ class ManageUserForm(AddUserForm):
 #======================================= LOGIN ========================================#
 
 class LoginForm(Form):
-    username = TextField('Username', validators=[Required()])
+    mail = TextField('Mail', validators=[Required()])
     pw = PasswordField('Password', validators=[Required()])
