@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<span class="feedback-author">{{ post.name }}</span>
 		{% if u and u.role == 2 %}
-			<a class="pull-right" href="/delete/feedback/{{ post.id }}" onclick="delete_feedback({{ post.id }})" >&times;</a>
+			<a class="pull-right remove" href="/delete/feedback/{{ post.id }}" onclick="delete_feedback({{ post.id }})" >&times;</a>
 		{% endif %}
 		<span class="date">({{ post.timestamp.strftime("%d %B %Y, %H:%M")}})</span>
 	</div>

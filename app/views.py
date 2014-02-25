@@ -8,8 +8,6 @@ from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm,
 
 
 
-
-
 #======================================== HOME ========================================#
 
 ## HOME
@@ -25,7 +23,8 @@ def home():
 def admin():
     universities = models.University.query.all()
     users = models.User.query.all()
-    return render_template("admin.html", page_id="admin", title="Administrator", universities=universities, users=users, u=g.user)
+    return render_template("admin.html", page_id="admin", title="Administrator", universities=universities, users=users,
+                           u=g.user)
 
 ## LOGIN
 @flask_sijax.route(app, "/login")
@@ -66,10 +65,11 @@ def edit_user_admin(user_id):
             user.set_password(pw)
 
         db.session.commit()
-        flash("Changes to user %r have been saved!" % str(form.name.data+" "+form.surname.data), "success")
+        flash("Changes to user %r have been saved!" % str(form.name.data + " " + form.surname.data), "success")
         return redirect(url_for('admin'))
 
-    return render_template("edit_user.html", page_id="admin", title="Edit - %s %s" % (user.name, user.surname), user=user, form=form, u=g.user)
+    return render_template("edit_user.html", page_id="admin", title="Edit - %s %s" % (user.name, user.surname),
+                           user=user, form=form, u=g.user)
 
 #==================================== UNIVERSITY =====================================#
 
@@ -77,7 +77,8 @@ def edit_user_admin(user_id):
 @flask_sijax.route(app, "/universities/")
 def list_universities():
     universities = models.University.query.all()
-    return render_template('uni_list.html', universities=universities, page_id="universities", title="Universities", u=g.user)
+    return render_template('uni_list.html', universities=universities, page_id="universities", title="Universities",
+                           u=g.user)
 
 ## ADD UNIVERSITY
 @flask_sijax.route(app, "/add/university")
@@ -168,11 +169,16 @@ def delete_feedback(feedback_id):
 ## ADD USER
 @flask_sijax.route(app, "/add/user")
 @flask_sijax.route(app, "/add/user/<int:role>")
-@login_required
 def add_user(role=0):
     form = AddUserForm()
 
     if form.validate_on_submit():
+
+        if (not g.user or g.user.id != models.ROLE_ADMIN) and models.ROLE_USER:
+            flash("Unauthorized access.", "danger")
+            return redirect(url_for('admin'))
+
+
         name = form.name.data
         surname = form.surname.data
         pw = form.pw.data
@@ -181,7 +187,7 @@ def add_user(role=0):
 
         db.session.add(user)
         db.session.commit()
-        flash("The user %r has been created!" % str(name+' '+surname), "success")
+        flash("The user %r has been created!" % str(name + ' ' + surname), "success")
         return redirect(url_for('admin'))
 
     return render_template("add_user.html", page_id="admin", title="New user", form=form, u=g.user)
@@ -190,7 +196,16 @@ def add_user(role=0):
 @flask_sijax.route(app, "/edit/user/<int:user_id>")
 @login_required
 def edit_user(user_id):
+    if not (g.user.id == user_id or g.user.role == 2):
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for('admin'))
+
     user = models.User.query.get(user_id)
+
+    if not user:
+        flash("User doesn't exist.", "danger")
+        return redirect(url_for('admin'))
+
     form = ManageUserForm(role=user.role)
     if form.validate_on_submit():
         user.name = form.name.data
@@ -202,7 +217,7 @@ def edit_user(user_id):
             user.set_password(pw)
 
         db.session.commit()
-        flash("Changes to user %r have been saved!" % str(form.name.data+" "+form.surname.data), "success")
+        flash("Changes to user %r have been saved!" % str(form.name.data + " " + form.surname.data), "success")
         return redirect(url_for('admin'))
 
     return render_template("edit_user.html", page_id="admin", title="Edit - " + user.mail,
@@ -212,8 +227,12 @@ def edit_user(user_id):
 @flask_sijax.route(app, "/delete/user/<int:user_id>")
 @login_required
 def delete_user(user_id):
-    models.User.delete_user(user_id)
+    if g.user.role == models.ROLE_ADMIN:
+        models.User.delete_user(user_id)
+    else:
+        flash("Unauthorized access.", "danger")
     return redirect(url_for('admin'))
+
 
 #======================================= SIJAX ========================================#
 
@@ -227,7 +246,7 @@ class SijaxHandler(object):
     @staticmethod
     def add_post(obj_response, name, message, university_id):
         feedback = models.Feedback.save_feedback(name, message, 5, university_id)
-        obj_response.html_prepend("#posts", render_template("post.html", post=feedback))
+        obj_response.html_prepend("#posts", render_template("post.html", post=feedback, u=g.user))
         obj_response.script("$('#feedback_form')[0].reset();")
 
 
@@ -237,6 +256,7 @@ class SijaxHandler(object):
 @lm.user_loader
 def load_user(id):
     return models.User.query.get(int(id))
+
 
 @app.before_request
 def before_request():
