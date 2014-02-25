@@ -21,11 +21,13 @@ class University(db.Model):
         self.update(name, username, password, description, location)
 
     def __repr__(self):
-        return 'Bla bla %r' % self.name
+        return 'University< %r >' % self.name
 
     def set_password(self, password):
         if password != "":  # allow submitting form without changing password
             self.pw_hash = generate_password_hash(password)
+        else:
+            raise Exception("Password cannot be empty")
 
     def check_password(self, password):
         return check_password_hash(self.pw_hash, password)
