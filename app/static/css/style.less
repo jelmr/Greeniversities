@@ -1,3 +1,6 @@
+@uni-image-width: 120px;
+@score-width: 120px;
+
 @gray-darker: lighten(#000, 13.5%);
 // #222
 @gray-dark: lighten(#000, 20%);
@@ -59,7 +62,7 @@ html {
 
   .remove {
     color: #62160d;
-    font-size:1.2em;
+    font-size: 1.2em;
     float: right;
 
     &:hover {
@@ -99,8 +102,6 @@ html {
     padding: 0 10px 0 10px;
     font-size: 1.2em;
   }
-
-
 
 }
 
@@ -145,7 +146,7 @@ html {
 
 legend {
 
-  .university-title{
+  .university-title {
     font-size: 2.5em;
   }
 
@@ -168,9 +169,17 @@ legend {
   width: 250px;
 }
 
-.clear { clear: both;}
-.left { float:left}
-.right {float:right}
+.clear {
+  clear: both;
+}
+
+.left {
+  float: left
+}
+
+.right {
+  float: right
+}
 
 a.logout {
   font-size: 0.6em;
@@ -179,3 +188,54 @@ a.logout {
 a.edit {
   font-size: 0.8em;
 }
+
+.rating {
+  margin-right: 20px;
+}
+
+#uni-list {
+
+  .university {
+    height: @uni-image-width;
+
+    .image {
+      .border-left-radius(5px);
+      width: @uni-image-width;
+      float: left;
+      height: 100%;
+      background-color: #fcc;
+    }
+    .text {
+      margin-left: @uni-image-width;
+      margin-right: @score-width;
+      height: 100%;
+      background-color: #cfc;
+
+      .title {
+        .border-right-radius(0px);
+        background: @gray-light;
+      }
+    }
+    .score {
+      .border-right-radius(5px);
+      width: @score-width;
+      height: 100%;
+      float: right;
+
+      background: #bbf;
+      ul {
+        display: inline-block !important;
+        vertical-align: middle !important;
+        list-style-type: none;
+        height:100%;
+
+        li {
+          margin-top:7px;
+        }
+      }
+
+    }
+
+  }
+}
+

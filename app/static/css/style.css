@@ -112,3 +112,45 @@ a.logout {
 a.edit {
   font-size: 0.8em;
 }
+.rating {
+  margin-right: 20px;
+}
+#uni-list .university {
+  height: 120px;
+}
+#uni-list .university .image {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  width: 120px;
+  float: left;
+  height: 100%;
+  background-color: #fcc;
+}
+#uni-list .university .text {
+  margin-left: 120px;
+  margin-right: 120px;
+  height: 100%;
+  background-color: #cfc;
+}
+#uni-list .university .text .title {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  background: #999999;
+}
+#uni-list .university .score {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 120px;
+  height: 100%;
+  float: right;
+  background: #bbf;
+}
+#uni-list .university .score ul {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  list-style-type: none;
+  height: 100%;
+}
+#uni-list .university .score ul li {
+  margin-top: 7px;
+}

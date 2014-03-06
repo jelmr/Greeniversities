@@ -80,6 +80,7 @@ class User(db.Model):
     pw_hash = db.Column(db.String)
     mail = db.Column(db.String(120), unique=True)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
+    feedback = db.relationship('Feedback', backref='university', lazy='dynamic')
 
     def __init__(self, name, surname, password, mail, role=ROLE_USER):
         self.name = name

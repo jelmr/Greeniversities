@@ -3,19 +3,39 @@
 
 
 	<h1>Universities</h1>
-	<div class="well well-sm">
-	{% for university in universities %}
+	<div class="well well-sm" id="uni-list">
+		{% for university in universities %}
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
-			</div>
-			<div class="panel-body">
-				{{ university.description }}
-			</div>
-		</div>
 
-	{% endfor %}
+
+			<div class="panel panel-default university">
+
+				<div class="image thumbnail">
+					<img src="http://placehold.it/200x200">
+
+				</div>
+
+				<div class="score">
+					<ul>
+						<li><span class="glyphicon glyphicon-star"></span> 9.0</li>
+						<li><span class="glyphicon glyphicon-euro"></span> 6.0</li>
+						<li><span class="glyphicon glyphicon-heart"></span> 7.0</li>
+						<li><span class="glyphicon glyphicon-home"></span> 7.5</li>
+					</ul>
+				</div>
+
+				<div class="text">
+					<div class="">
+						<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
+					</div>
+					<div class="">
+						{{ university.description }}
+					</div>
+				</div>
+
+			</div>
+
+		{% endfor %}
 	</div>
 
 	{{ super() }} <!-- Add flash messages -->
