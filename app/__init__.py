@@ -1,14 +1,16 @@
 from flask import Flask, g
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.lesscss import lesscss
+from lesscss import lesscss
 from flask.ext.login import LoginManager
 import os
 import flask_sijax
+import logging
 
 
 ## FLASK
 app = Flask(__name__)
 app.config.from_object('config')
+logging.basicConfig(level=logging.DEBUG)
 
 ## SQL ALCHEMY
 db = SQLAlchemy(app)
