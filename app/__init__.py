@@ -1,6 +1,6 @@
 from flask import Flask, g
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.lesscss import lesscss
+from lesscss import lesscss
 from flask.ext.login import LoginManager
 import os
 import flask_sijax
