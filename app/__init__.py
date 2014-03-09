@@ -4,11 +4,14 @@ from flask.ext.lesscss import lesscss
 from flask.ext.login import LoginManager
 import os
 import flask_sijax
+import logging
 
 
 ## FLASK
 app = Flask(__name__)
 app.config.from_object('config')
+app.config['DEBUG'] = True
+logging.basicConfig(level=logging.DEBUG)
 
 ## SQL ALCHEMY
 db = SQLAlchemy(app)
