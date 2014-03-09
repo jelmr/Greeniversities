@@ -10,7 +10,6 @@ import logging
 ## FLASK
 app = Flask(__name__)
 app.config.from_object('config')
-app.config['DEBUG'] = True
 logging.basicConfig(level=logging.DEBUG)
 
 ## SQL ALCHEMY
