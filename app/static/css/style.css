@@ -121,21 +121,24 @@ a.edit {
 #uni-list .university .image {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
   width: 120px;
   float: left;
   height: 100%;
-  background-color: #fcc;
+  margin-right: 10px;
 }
 #uni-list .university .text {
   margin-left: 120px;
   margin-right: 120px;
   height: 100%;
-  background-color: #cfc;
+  background-color: #eeeeee;
 }
-#uni-list .university .text .title {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
-  background: #999999;
+#uni-list .university .text .uni-title {
+  color: #ddd;
+  background: #ddd;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 #uni-list .university .score {
   border-bottom-right-radius: 5px;
@@ -143,7 +146,8 @@ a.edit {
   width: 120px;
   height: 100%;
   float: right;
-  background: #bbf;
+  color: #fff;
+  background: #5cb85c;
 }
 #uni-list .university .score ul {
   display: inline-block !important;

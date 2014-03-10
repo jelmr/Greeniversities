@@ -18,6 +18,7 @@ class EditUniversityForm(Form):
     name = TextField('Name', validators=[Required()])
     description = TextAreaField('Feedback')
     location = TextField('Location', validators=[Required()])
+    logo_url = TextField('Logo url')
 
 
 class AddUniversityForm(EditUniversityForm):
@@ -56,3 +57,7 @@ class AdminManageUserForm(ManageUserForm):
 class LoginForm(Form):
     mail = TextField('Mail', validators=[Required()])
     pw = PasswordField('Password', validators=[Required()])
+
+
+#==================================== STUDYFIELD ======================================#
+

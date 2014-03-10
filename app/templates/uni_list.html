@@ -11,7 +11,11 @@
 			<div class="panel panel-default university">
 
 				<div class="image thumbnail">
-					<img src="http://placehold.it/200x200">
+					{%  if university.logo_url %}
+						<img src="{{ university.logo_url }}">
+					{% else %}
+						<span class="logo-text" >{{ university.name }}</span>
+					{% endif %}
 
 				</div>
 
@@ -25,7 +29,7 @@
 				</div>
 
 				<div class="text">
-					<div class="">
+					<div class="uni-title">
 						<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
 					</div>
 					<div class="">

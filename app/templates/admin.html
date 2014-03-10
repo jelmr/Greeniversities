@@ -16,6 +16,7 @@
 {#	</div>#}
 	<hr>
 
+	{% if u.role == 1 or u.role == 2 %}
 	<legend>Universities</legend>
 	<div class="well well-sm">
 		<div class="panel panel-default">
@@ -34,6 +35,30 @@
 			</div>
 		</div>
 	</div>
+{% endif %}
+
+	<hr>
+
+	{% if  u.role == 2 %}
+		<legend>Studies</legend>
+		<div class="well well-sm">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Studies</strong>
+					<span class="pull-right"><a href="/add/university"><span class="glyphicon glyphicon-plus"></span> Add study</a></span>
+				</div>
+				<div class="panel-body">
+					<ul>
+						{% for study in study_fields %}
+							<li>
+								<a href="{{ url_for('edit_university', university_id=1) }}">{{ study.name }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 
 
 {% if u.role == 2 %}

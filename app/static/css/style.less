@@ -200,20 +200,24 @@ a.edit {
 
     .image {
       .border-left-radius(5px);
+      .border-right-radius(0px);
       width: @uni-image-width;
       float: left;
       height: 100%;
-      background-color: #fcc;
+      margin-right:10px;
+
     }
     .text {
       margin-left: @uni-image-width;
       margin-right: @score-width;
       height: 100%;
-      background-color: #cfc;
+      background-color: @gray-lighter;
 
-      .title {
-        .border-right-radius(0px);
-        background: @gray-light;
+      .uni-title {
+        color: #ddd;
+        background: #ddd;
+        font-size:1.2em;
+        font-weight:bold;
       }
     }
     .score {
@@ -221,8 +225,9 @@ a.edit {
       width: @score-width;
       height: 100%;
       float: right;
+      color: #fff;
 
-      background: #bbf;
+      background: @brand-success;
       ul {
         display: inline-block !important;
         vertical-align: middle !important;
@@ -238,4 +243,5 @@ a.edit {
 
   }
 }
+
 

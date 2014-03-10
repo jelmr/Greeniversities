@@ -8,6 +8,7 @@ from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm,
 
 
 
+
 #======================================== HOME ========================================#
 
 ## HOME
@@ -23,7 +24,9 @@ def home():
 def admin():
     universities = models.University.query.all()
     users = models.User.query.all()
+    study_fields = models.StudyField.query.all()
     return render_template("admin.html", page_id="admin", title="Administrator", universities=universities, users=users,
+                           study_fields=study_fields,
                            u=g.user)
 
 ## LOGIN
@@ -92,9 +95,10 @@ def add_university():
         pw = form.pw.data
         description = form.description.data
         location = form.location.data
+        logo_url = form.location.data
 
         university = models.University(name=name, username=username, password=pw, description=description,
-                                       location=location)
+                                       location=location, logo_url=logo_url)
         db.session.add(university)
         db.session.commit()
         flash("The university %r has been created!" % str(name), "success")
@@ -111,13 +115,14 @@ def edit_university(university_id):
     form = EditUniversityForm()
 
     if form.validate_on_submit():
+        logo_url = form.logo_url.data
         name = form.name.data
         username = form.username.data
         pw = form.pw.data
         description = form.description.data
         location = form.location.data
 
-        models.University.update(university, name, username, pw, description, location)
+        models.University.update(university, name, username, pw, description, location, logo_url)
 
         flash("Changes to %r have been saved!" % str(name), "success")
         return redirect(url_for('admin'))
@@ -177,7 +182,6 @@ def add_user(role=0):
         if (not g.user or g.user.id != models.ROLE_ADMIN) and models.ROLE_USER:
             flash("Unauthorized access.", "danger")
             return redirect(url_for('admin'))
-
 
         name = form.name.data
         surname = form.surname.data

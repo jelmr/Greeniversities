@@ -3,10 +3,18 @@
 
 	<legend><span class="university-title">{{ university.name }}</span> - <span
 			class="location-title">{{ university.location }}</span></legend>
+	{%  if university.logo_url %}
+		<img class="pull-left" width="300px" src="{{ university.logo_url }}">
+	{% endif %}
 	<p>{{ university.description }}</p>
 
-	<div
-
+	<h3> Studies</h3>
+	<ul>
+		{% for study in university.studies %}
+			<li>{{ study.name }}</li>
+		{% endfor %}
+	</ul>
+	<div class="clearfix"></div>
 	<h2>Feedback</h2>
 
 	<div id="posts">
