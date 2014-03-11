@@ -1,7 +1,9 @@
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField, PasswordField, SelectField
+from wtforms import TextField, TextAreaField, PasswordField, SelectField, IntegerField
 from wtforms.validators import Required, EqualTo, Email
+
 from app import models
+
 
 #===================================== FEEDBACK =======================================#
 
@@ -11,10 +13,8 @@ class SubmitFeedbackForm(Form):
 
 #==================================== UNIVERSITY ======================================#
 
+
 class EditUniversityForm(Form):
-    username = TextField('Username', validators=[Required()])
-    pw = PasswordField('New Password', [EqualTo('confirmpw', message='Passwords must match')])
-    confirmpw = PasswordField('Repeat Password')
     name = TextField('Name', validators=[Required()])
     description = TextAreaField('Feedback')
     location = TextField('Location', validators=[Required()])
@@ -22,11 +22,10 @@ class EditUniversityForm(Form):
 
 
 class AddUniversityForm(EditUniversityForm):
-    pw = PasswordField('New Password', [Required(), EqualTo('confirmpw', message='Passwords must match')])
-    confirmpw = PasswordField('Repeat Password', validators=[Required()])
-
+    pass
 
 #======================================== USER ========================================#
+
 
 class ChangeUserInfo(Form):
     name = TextField('Name', validators=[Required()])
@@ -49,7 +48,8 @@ class ManageUserForm(AddUserForm):
 
 
 class AdminManageUserForm(ManageUserForm):
-    role = SelectField('Role', choices=[(str(models.ROLE_USER), 'User'), (str(models.ROLE_UNIVERSITY), 'University'), (str(models.ROLE_ADMIN), 'Admin')])
+    role = SelectField('Role', choices=[(str(models.ROLE_USER), 'User'), (str(models.ROLE_UNIVERSITY), 'University'),
+                                        (str(models.ROLE_ADMIN), 'Admin')])
 
 
 #======================================= LOGIN ========================================#
@@ -61,3 +61,11 @@ class LoginForm(Form):
 
 #==================================== STUDYFIELD ======================================#
 
+
+
+#====================================== STUDY =========================================#
+
+class AddStudyForm(Form):
+    name = TextField('Name', validators=[Required()])
+    url = TextField('URL', validators=[Required()])
+    studyfield_id = IntegerField('Studyfield id', validators=[Required()])

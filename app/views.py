@@ -4,7 +4,7 @@ import flask_sijax
 
 from app import app, models, db, lm
 from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm, AddUserForm, ManageUserForm, LoginForm, \
-    AdminManageUserForm
+    AdminManageUserForm, AddStudyForm
 
 
 
@@ -14,7 +14,8 @@ from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm,
 ## HOME
 @flask_sijax.route(app, "/")
 def home():
-    return render_template('index.html', page_id="home", title="Home", u=g.user)
+    studyfields = models.StudyField.query.all()
+    return render_template('index.html', page_id="home", title="Home", u=g.user, studyfields=studyfields)
 
 #======================================== ADMIN =======================================#
 
@@ -91,14 +92,12 @@ def add_university():
 
     if form.validate_on_submit():
         name = form.name.data
-        username = form.username.data
-        pw = form.pw.data
+
         description = form.description.data
         location = form.location.data
         logo_url = form.location.data
 
-        university = models.University(name=name, username=username, password=pw, description=description,
-                                       location=location, logo_url=logo_url)
+        university = models.University(name=name, description=description, location=location, logo_url=logo_url)
         db.session.add(university)
         db.session.commit()
         flash("The university %r has been created!" % str(name), "success")
@@ -117,12 +116,10 @@ def edit_university(university_id):
     if form.validate_on_submit():
         logo_url = form.logo_url.data
         name = form.name.data
-        username = form.username.data
-        pw = form.pw.data
         description = form.description.data
         location = form.location.data
 
-        models.University.update(university, name, username, pw, description, location, logo_url)
+        models.University.update(university, name, description, location, logo_url)
 
         flash("Changes to %r have been saved!" % str(name), "success")
         return redirect(url_for('admin'))
@@ -237,6 +234,49 @@ def delete_user(user_id):
         flash("Unauthorized access.", "danger")
     return redirect(url_for('admin'))
 
+#======================================= STUDY ========================================#
+
+## ADD STUDY
+@flask_sijax.route(app, "/add/study/<int:university_id>")
+@login_required
+def add_study(university_id):
+    form = AddStudyForm()
+
+    if form.validate_on_submit():
+        name = form.name.data
+        url = form.url.data
+        studyfield_id = form.studyfield_id.data
+
+        studyfield = models.StudyField.query.get(studyfield_id)
+        university = models.University.query.get(university_id)
+
+        study = models.Study(name=name, url=url, university=university, studyfield=studyfield)
+        db.session.add(study)
+        db.session.commit()
+        flash("The study %r has been created!" % str(name), "success")
+        return redirect(url_for('admin'))
+
+    return render_template("add_study.html", page_id="admin", title="Add study", form=form, u=g.user)
+
+## EDIT USER
+@flask_sijax.route(app, "/edit/study/<int:study_id>")
+@login_required
+def edit_study(study_id):
+
+    form = AddStudyForm()
+    study = models.Study.query.get(study_id)
+
+    if form.validate_on_submit():
+        name = form.name.data
+        url = form.url.data
+        studyfield_id = form.studyfield_id.data
+
+        models.Study.update(study, name, url, study.university_id, studyfield_id)
+
+        flash("The study %r has been created!" % str(name), "success")
+        return redirect(url_for('admin'))
+
+    return render_template("edit_study.html", study=study, page_id="admin", title="Add study", form=form, u=g.user)
 
 #======================================= SIJAX ========================================#
 

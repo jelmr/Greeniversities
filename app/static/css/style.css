@@ -1,6 +1,41 @@
 html {
+  height: 100%;
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;
+}
+body {
+  height: 100%;
+  background: #809a56;
+}
+#study-table td,
+#study-table th {
+  padding: 0 15px 0 15px;
+}
+#content-box {
+  margin-top: -50px;
+  padding: 50px;
+  margin-bottom: -30px;
+  min-height: 100%;
+  background: #fff;
+  box-shadow: 0px 10px 10px #333;
+}
+#footer-content {
+  height: 30px;
+}
+.title {
+  font-size: 2em;
+  font-weight: 200;
+  font-style: italic;
+}
+.title:hover,
+.title:active,
+.title:visited {
+  color: #fff;
+}
+.title .green {
+  color: #86e03c;
+  font-weight: 900 !important;
+  font-style: normal;
 }
 .feedback-post {
   display: block;
@@ -115,6 +150,10 @@ a.edit {
 .rating {
   margin-right: 20px;
 }
+h4 {
+  font-size: 1.1em;
+  font-weight: bold;
+}
 #uni-list .university {
   height: 120px;
 }
@@ -147,7 +186,7 @@ a.edit {
   height: 100%;
   float: right;
   color: #fff;
-  background: #5cb85c;
+  background: #649f30;
 }
 #uni-list .university .score ul {
   display: inline-block !important;

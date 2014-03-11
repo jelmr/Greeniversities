@@ -1,21 +1,33 @@
 {% extends "base.html" %}
 {% block maincontent %}
 
-	<legend><span class="university-title">{{ university.name }}</span> - <span
-			class="location-title">{{ university.location }}</span></legend>
+	<legend><span class="university-title">{{ university.name }}</span> </legend>
 	{%  if university.logo_url %}
 		<img class="pull-left" width="300px" src="{{ university.logo_url }}">
 	{% endif %}
-	<p>{{ university.description }}</p>
 
+
+	<h3>Scores</h3>
+	<dl class="dl-horizontal" style="display: inline-block;">
+		<dt>Overal score</dt><dd>89%</dd>
+		<dt>Paper score</dt><dd>66% </dd>
+		<dt>User score</dt><dd>70%</dd>
+		<dt>Sustainabul ranking</dt><dd>17 / 23</dd>
+	</dl>
+
+	<h3>Description</h3>
+	<p>{{ university.description | safe }}</p>
+
+	<div class="clearfix"></div>
 	<h3> Studies</h3>
+	This university offers the following studies:
 	<ul>
 		{% for study in university.studies %}
-			<li>{{ study.name }}</li>
+			<li><a href="{{ study.url }}">{{ study.name }}</a></li>
 		{% endfor %}
 	</ul>
 	<div class="clearfix"></div>
-	<h2>Feedback</h2>
+	<h3>Feedback</h3>
 
 	<div id="posts">
 		{% for post in university.feedback | reverse %}
@@ -37,6 +49,7 @@
 			   onclick="submit_feedback_form('#feedback_form','{{ university.id }}')">
 
 	</form>
+
 
 	{{ super() }} <!-- Add flash messages -->
 {% endblock %}

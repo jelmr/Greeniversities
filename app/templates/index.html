@@ -2,8 +2,25 @@
 {% block maincontent %}
 
 
-<h1>Home</h1>
+
 
 
 	{{ super() }} <!-- Add flash messages -->
+
+	<div class="jumbotron">
+		<h1>Welcome,</h1>
+
+
+
+		What studyfield are you intrested in?
+		{% for studyfield in studyfields %}
+			{{ studyfield.name }}
+			{% for study in studyfield.studies %}
+				{{ study.name }}
+			{% endfor %}
+		{% endfor %}
+
+	</div>
+
+
 {% endblock %}

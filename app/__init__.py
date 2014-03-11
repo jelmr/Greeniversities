@@ -1,6 +1,5 @@
 from flask import Flask, g
 from flask.ext.sqlalchemy import SQLAlchemy
-from lesscss import lesscss
 from flask.ext.login import LoginManager
 import os
 import flask_sijax
@@ -15,8 +14,6 @@ logging.basicConfig(level=logging.DEBUG)
 ## SQL ALCHEMY
 db = SQLAlchemy(app)
 
-## LESS
-lesscss(app)
 
 ## SIJAX
 path = os.path.join('.', os.path.dirname(__file__), 'static/js/sijax/')

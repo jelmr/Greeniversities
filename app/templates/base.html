@@ -30,7 +30,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/">Greeniversity</a>
+			<a class="navbar-brand title" href="/"><span class="green">Green</span>iversity</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -58,7 +58,7 @@
 </div>
 <div style="height:50px;"></div>
 
-<div class="container">
+<div class="container" id="content-box">
 
 	<!--padding nav bar -->
 	{% with messages = get_flashed_messages(with_categories=true) %}
@@ -82,18 +82,19 @@
 	{% endblock %}
 
 
-</div>
+
+	<div class="clearfix"></div>
+
+	<div class="container" id="footer-content">
+		<!-- Example row of columns -->
 
 
-<div class="container">
-	<!-- Example row of columns -->
+		<hr>
 
-
-	<hr>
-
-	<footer>
-		<p>&copy; Greeniversity 2014 - <a href="/login">Login</a> - <a href="/logout">Logout</a></p>
-	</footer>
+		<footer>
+			<p>&copy; Greeniversity 2014 - <a href="/login">Login</a> - <a href="/logout">Logout</a></p>
+		</footer>
+	</div>
 </div>
 <!-- /container -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

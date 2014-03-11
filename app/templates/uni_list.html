@@ -33,7 +33,7 @@
 						<a href="{{ url_for('university', university_id=university.id) }}">{{ university.name }}</a>
 					</div>
 					<div class="">
-						{{ university.description }}
+						{{ university.description | striptags | truncate(480) }}
 					</div>
 				</div>
 

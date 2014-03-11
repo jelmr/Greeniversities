@@ -11,36 +11,25 @@ ROLE_ADMIN = 2
 class University(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    username = db.Column(db.String, unique=True)
-    pw_hash = db.Column(db.String)
     description = db.Column(db.String(2000))
     location = db.Column(db.String)
     logo_url = db.Column(db.String)
     feedback = db.relationship('Feedback', backref='university', lazy='dynamic')
     studies = db.relationship('Study', backref='university', lazy='dynamic')
 
-    def __init__(self, name, username, password, description, location, logo_url):
-        self.update(name, username, password, description, location, logo_url)
+    def __init__(self, name, description, location, logo_url):
+        self.update(name, description, location, logo_url)
 
     def __repr__(self):
         return 'University< %r >' % self.name
 
-    def set_password(self, password):
-        if password != "":  # allow submitting form without changing password
-            self.pw_hash = generate_password_hash(password)
-        else:
-            raise Exception("Password cannot be empty")
-
-    def check_password(self, password):
-        return check_password_hash(self.pw_hash, password)
 
     def get_score(self):
         return 9
 
-    def update(self, name, username, password, description, location, logo_url):
+    def update(self, name, description, location, logo_url):
         self.name = name
-        self.username = username
-        self.set_password(password)
+
         self.description = description
         self.location = location
         self.logo_url = logo_url
@@ -125,6 +114,13 @@ class Study(db.Model):
     url = db.Column(db.String)
     university_id = db.Column(db.Integer, db.ForeignKey('university.id'))
     studyfield_id = db.Column(db.Integer, db.ForeignKey('studyfield.id'))
+
+    def update(self, name, url, university_id, studyfield_id):
+        self.name = name
+        self.url = url
+        self.university_id = university_id
+        self.studyfield_id = studyfield_id
+        db.session.commit()
 
 
 class StudyField(db.Model):
