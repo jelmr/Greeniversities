@@ -1,4 +1,4 @@
-from lesscss import lesscss
+from flask.ext.lesscss import lesscss
 from app import app
 
 lesscss(app)
