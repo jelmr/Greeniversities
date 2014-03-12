@@ -4,7 +4,7 @@ import flask_sijax
 
 from app import app, models, db, lm
 from app.forms import SubmitFeedbackForm, EditUniversityForm, AddUniversityForm, AddUserForm, ManageUserForm, LoginForm, \
-    AdminManageUserForm, AddStudyForm
+    AdminManageUserForm, AddStudyForm, AddStudyfieldForm
 
 
 
@@ -27,7 +27,7 @@ def admin():
     users = models.User.query.all()
     study_fields = models.StudyField.query.all()
     return render_template("admin.html", page_id="admin", title="Administrator", universities=universities, users=users,
-                           study_fields=study_fields,
+                           studyfields=study_fields,
                            u=g.user)
 
 ## LOGIN
@@ -95,7 +95,7 @@ def add_university():
 
         description = form.description.data
         location = form.location.data
-        logo_url = form.location.data
+        logo_url = form.logo_url.data
 
         university = models.University(name=name, description=description, location=location, logo_url=logo_url)
         db.session.add(university)
@@ -234,6 +234,53 @@ def delete_user(user_id):
         flash("Unauthorized access.", "danger")
     return redirect(url_for('admin'))
 
+#==================================== STUDYFIELD ======================================#
+
+## ADD STUDYFIELD
+@flask_sijax.route(app, "/add/studyfield")
+@login_required
+def add_studyfield():
+    form = AddStudyfieldForm()
+
+    if form.validate_on_submit():
+        name = form.name.data
+
+        sf = models.StudyField(name=name)
+
+        db.session.add(sf)
+        db.session.commit()
+        flash("The studyfield %r has been created!" % str(name), "success")
+        return redirect(url_for('admin'))
+
+    return render_template("add_studyfield.html", page_id="admin", title="Add study", form=form, u=g.user)
+
+## EDIT STUDYFIELD
+@flask_sijax.route(app, "/edit/studyfield/<int:studyfield_id>")
+@login_required
+def edit_studyfield(studyfield_id):
+
+    form = AddStudyfieldForm()
+    studyfield = models.StudyField.query.get(studyfield_id)
+
+    if form.validate_on_submit():
+        name = form.name.data
+        models.StudyField.update(studyfield, name)
+
+        flash("The studyfield %r has been updated!" % str(name), "success")
+        return redirect(url_for('admin'))
+
+    return render_template("edit_studyfield.html", studyfield=studyfield, page_id="admin", title="Edit studyfield", form=form, u=g.user)
+
+## DELETE STUDYFIELD
+@flask_sijax.route(app, "/delete/studyfield/<int:studyfield_id>")
+@login_required
+def delete_studyfield(studyfield_id):
+    if g.user.role == models.ROLE_ADMIN:
+        models.StudyField.delete_studyfield(studyfield_id)
+    else:
+        flash("Unauthorized access.", "danger")
+    return redirect(url_for('admin'))
+
 #======================================= STUDY ========================================#
 
 ## ADD STUDY
@@ -258,7 +305,7 @@ def add_study(university_id):
 
     return render_template("add_study.html", page_id="admin", title="Add study", form=form, u=g.user)
 
-## EDIT USER
+## EDIT STUDY
 @flask_sijax.route(app, "/edit/study/<int:study_id>")
 @login_required
 def edit_study(study_id):
@@ -273,10 +320,21 @@ def edit_study(study_id):
 
         models.Study.update(study, name, url, study.university_id, studyfield_id)
 
-        flash("The study %r has been created!" % str(name), "success")
-        return redirect(url_for('admin'))
+        flash("The study %r has been updated!" % str(name), "success")
+        return redirect(url_for('edit_university', university_id=study.university_id))
 
-    return render_template("edit_study.html", study=study, page_id="admin", title="Add study", form=form, u=g.user)
+    return render_template("edit_study.html", study=study, page_id="admin", title="Edit study", form=form, u=g.user)
+
+## DELETE STUDYFIELD
+@flask_sijax.route(app, "/delete/study/<int:study_id>")
+@login_required
+def delete_study(study_id):
+    if g.user.role == models.ROLE_ADMIN:
+        models.Study.delete_study(study_id)
+    else:
+        flash("Unauthorized access.", "danger")
+    return redirect(url_for('admin'))
+
 
 #======================================= SIJAX ========================================#
 

@@ -1,0 +1,712 @@
+Aligning Economic Impact with Environmental Benefits: A Green Strategy Model
+Qing Gu
+Department of Computer Science
+VU University Amsterdam
+The Netherlands
+q.gu@vu.nl
+
+Patricia Lago
+Department of Computer Science
+VU University Amsterdam
+The Netherlands
+p.lago@vu.nl
+
+Abstract—To achieve lower energy consumption many green
+strategies (e.g. virtualize applications and consolidate them
+on shared server machines, or optimize the usage of the
+private cloud by opening up to external consumers) have
+been discussed. In practice, however, the major incentive for a
+company to go green is reducing costs. While green strategies
+often focus on technical and environmental issues, they hardly
+address the economic impact that they may bring. If green
+strategies do not lead to an explicit (and significant) reduction
+of costs (hence increase in revenues) they are nice but not
+part of the business strategy of the company. In this paper we
+propose a green strategy model that provides decision makers
+with the information needed to decide on whether to take
+green strategies and eventually how to align them with their
+business strategies. This model provides a means to codify
+green strategies in such a way that the link between green
+strategies, their economic impact and green goals becomes
+explicit. We applied the model in a case study to codify 132
+green actions collected from Dutch data centers. This exercise
+further confirmed the advantage of using the proposed model
+and helped us identifying future improvements.
+Keywords-Green IT; green strategy; sustainability
+
+I. I NTRODUCTION
+Over the last decades, the use of Information Technology
+(IT) has been exploded to nearly everywhere, making our
+lives and work much more efficient and convenient. Besides
+the benefits that IT brings us, it also contributes significantly
+to environmental problems [1]–[4], not only because of the
+electricity consumed by computers, data centers, networks,
+and other IT utilities, but also due to the short life cycle
+of IT hardware. While “going green” has become a global
+topic in recent years, making IT greener has been attracting
+tremendous attention from both academia and industry aiming at understanding and reducing the energy consumption
+of computing systems [5], [6].
+Many green actions and strategies have been discussed in
+the literature and practiced in the industry to achieve the
+green goal of lower energy consumption. During the life
+cycle stages of IT, green strategies can be applied in green
+design (e.g. the move from single-core to dual- and quadcore
+processors [7]), green manufacturing (e.g. making green
+PCs using nontoxic materials that consume less electrical
+power and are easily reassembled [7], produce upgradable
+equipment [8]), green use (e.g. reducing energy consumption
+
+Simone Potenza
+Department of Computer Science
+VU University Amsterdam
+The Netherlands
+simone.potenza@gmail.com
+
+by PCs or enabling power management features [7], print
+more efficiently by e.g. printing double-sided [9]), and green
+disposal (e.g. reuse, refurbish, and recycle [7], redeploying
+IT equipment to other areas of the company, resort to
+donation as a means of disposal [10]).
+From these examples of green strategies, we can see
+that applying a green strategy to achieve environmental
+goals is obviously not costless. It requires additional investments, business process changes, and extra efforts from
+both companies and individuals. Although many of the green
+strategies would lead to lower energy bills for a company
+(and thus reduce costs), the tradeoff between the economic
+gain and investment is often unclear to the decision makers
+of a company. As a result, green goals are often regarded
+as a nice optional bonus rather than a must-have target, and
+the priority of green goals decreases.
+To ensure economic benefits while making a sustainable
+business, there must be an alignment between green goals
+and organizational/business goals. Only when such an alignment is in place, the decision makers of a company can be
+motivated to take green actions [11]. In the business domain,
+the strategy modeling language (SML) [12] has been used
+to align business model with business goal, business plan,
+and optimization objectives to ensure business strategies can
+be optimally realized. To our knowledge, currently there
+is no systematic approach to describe solutions, actions,
+or strategies that can produce environmental benefits and
+enforce the alignment between green strategies and business
+goals.
+To this end, in this paper we propose a green strategy
+model to codify green actions (or solutions, practices) aiming at achieving environmental goals, and to explicitly link
+green actions to its economic impact and green goals. This
+link aids the tradeoff analysis between financial investments
+and economic benefits. Such tradeoff analysis provides evidence for decision makers to apply green strategies and
+accommodate business and operational goals to green goals.
+Moreover, by modeling green strategies in a systematic way,
+green strategies from multiple companies can be compared,
+integrated, or generalized to a set of green approaches that
+can be shared and reused among companies.
+
+The remainder of the paper is structured as follows.
+Section II explains the design of the green strategy model.
+Section III introduces a case study that we carried out
+to codify the green actions of several Dutch data centers
+using the proposed green strategy model and discusses our
+experience in using the model and the lessons learned.
+Section IV concludes the paper.
+II. T HE D ESIGN OF THE G REEN S TRATEGY M ODEL
+The design of our green strategy model was inspired
+by the definitions collected by the Global Development
+Research Center (GDSC1 ), which is an independent nonprofit think tank carrying initiatives in education, research
+and practice. Their goal is to contribute to broad-based
+global development by facilitating the creation and use of
+knowledge. The GDSC glossary of environmental terms
+elicited definitions from international organizations (like ISO
+and the Environmental Protection Agency of the USA). We
+found two definitions especially relevant to our purposes:
+Definition 1. A green strategy (aka environmental strategy) is a plan of action intended to accomplish a specific
+environmental goal.
+Definition 2. A green goal (aka environmental goal) is an
+objective that an organization sets itself to achieve, and
+which is quantified where practical.
+The first definition breaks down a strategy into two
+components: a plan of actions and a specific environmental
+goal the actions should help achieving. Moreover, the second
+definition implies that whenever applicable we should be
+able to quantify the extent to which an environmental goal
+is achieved. This calls, in our opinion, for the association of
+metrics (either qualitative or quantitative) that measure the
+contribution of each action to the achievement of the goal.
+
+Figure 1.
+
+Example 1: A Green Strategy for Electronic Bookstores
+
+Putting the above elements together, we designed the first
+version of a green strategy as graphically illustrated by the
+example in Figure 1. The example has been extracted from
+the electronic bookstore domain. It represents a strategy aiming at reducing the carbon footprint (CF) of printing books.
+1 www.gdrc.org
+
+The strategy includes two actions: the first action Print on
+demand refers to printing books only after customers order
+them. This action makes the business more sustainable by
+reducing the costs of storing books in large quantities before
+customers order them. While this effect is not “green per
+se”, i.e. it does have an indirect positive impact on the
+total CF by reducing paper consumption to the minimum
+(i.e. exactly the amount of books that are actually ordered
+by customers). The second action Print near to delivery
+address is to physically print the ordered books in a store as
+near as possible to the address of the customer. This allows
+to shorten the delivery distance, hence reducing the CF of
+transportation.
+We developed a number of examples (from both theory
+and practice) to challenge our first model of green strategy.
+In doing that, we have identified the following weaknesses.
+1) Each action can have one or more effects that help
+achieving the environmental goal. In order to select the
+best actions to put in place in a certain organization
+we must make each effect explicit. In doing that we
+can understand further what we need to measure to
+monitor the progress toward achieving the green goal.
+For instance, in the example of Figure 1 the action
+effects (added on the associated arrows) identify that
+by monitoring paper consumption and transportation
+distances, respectively, we can draw the trend toward
+reducing the total CF.
+2) While action effects are typically technical or environmental in nature, they do not explain the economic
+impact that they have. We had various discussions with
+companies actively involved in green ICT and/or in
+decreasing their CF, and all explained that the major
+incentive for them to go green is to reduce costs.
+Hence, if green strategies do not lead to an explicit
+(and significant) reduction of costs (hence increase in
+revenues) they are (again) nice but not part of the
+business strategy of the organization. In periods of
+economic crisis, they are the first to be forgotten, or
+neglected.
+To challenge our first model in aligning green strategies
+and business strategies, we associated each action effect with
+its (potential) economic impact. This resulted in the revised
+green strategy model illustrated in Figure 2. A green goal is
+realized by a number of green actions, and a green action
+can achieve a number of green goals. Each green action
+has a description to explain what the green action means. A
+green action leads to at least one action effect, which causes
+at least one economic impact. A green action belongs to
+one sub-category, which is a sub-set of a category. While
+the green goal represents ecologic impact of the strategy as
+a whole, the action effects detail the ecologic impact of each
+action individually.
+
+Figure 2.
+
+The Green Strategy Model
+
+III. A C ASE S TUDY - C ODIFY THE G REEN ACTIONS OF
+D UTCH DATA C ENTERS U SING THE P ROPOSED G REEN
+S TRATEGY M ODEL
+After the design of the green strategy model, we planned
+to challenge the model to find out its suitability in making
+explicit and aligning the economic impact of green actions
+and the corresponding environmental benefits. One way to
+challenge the model is to codify green strategies that have
+been used or proposed in industry. By doing so, we would
+be able to assess the added value and limitations when using
+our model to codify the green strategies.
+To challenge the model we selected an industrial case
+where 132 green actions were documented by the MJA
+(Meerjarenafspraaken meaning long-term agreements) [13].
+The MJA is a voluntary agreement between the Dutch
+government and the largest energy consumers in the Netherlands, these being both large industries (e.g. banks and
+telecom providers) and higher education institutes (e.g.
+universities). This agreement is brought to life in order
+to improve the energy efficiency of products, services and
+processes resulting in a reduction of fossil fuel usage. It
+relates to activities within businesses and sustainable energy.
+For more than 15 years the MJA has been in place and has
+proven to be a good measure in realizing improvements in
+energy efficiency.
+In the case study, we have been provided with a spreadsheet of the 132 green actions gathered by multiple data
+centers as part of MJA agreements decided by the Funding
+Agency of the Dutch Ministry of Economic Affairs, Agriculture and Innovation2 . The spreadsheet of green actions
+has been created by domain experts, who are responsible
+for designing and managing data centers. Each action is described in terms of 30 different fields, including e.g. branch,
+type, short descriptions, long descriptions. These actions
+are meant to lower and optimize the energy consumption
+2 www.agentschap.nl
+
+needed to run a data center in terms of deployed applications,
+deployed hardware, cooling, lighting, redundancy on energy
+supply, space organization, design of the datacenter, network
+capacity and so on.
+One of the objectives of creating such a spreadsheet was
+to collect green actions of each data center, and then share
+and communicate with other data centers. Despite that a
+spreadsheet with pre-defined fields is used to document
+green actions, different experts describe the green actions in
+different manners, in terms of the level of detail and abstraction, as well as the assumptions made on the background
+knowledge of readers. As a result, the decision makers of
+data centers could neither completely understand the green
+actions nor estimate the investment needed and the economic
+benefits that could be brought by each green action. As a
+result, the usefulness of such a shared spreadsheet is lost.
+In the following, we introduce the steps we took to codify
+the green actions provided to us, present an example of a
+codified green action, and discuss the lessons we learned
+from the case study.
+A. Case Study Execution
+As input to our case study we received a spreadsheet
+containing 132 actions described by 30 fields. This spreadsheet was written in Dutch, and contained actions and best
+practices originated by organizations participating in the
+MJA agreement, and meant to optimize energy consumption
+and management of data centers.
+To codify the green actions according to our proposed
+model we have taken the following four steps:
+1) Translate the document from Dutch to English.
+Translating in English was a necessary step to be able
+to reflect and share the findings of this work. We
+consider English language universally understood in the
+community and industry, and therefore more suitable to
+share opinion and information with people all around
+the world. The translation has been first performed by
+
+Google Translate, and then refined by a native Dutch
+speaker in order to spot and remove grammar errors
+and ambiguities.
+2) Identify the fields that are most relevant for the
+model.
+In the initial MJA spreadsheet provided to us each green
+action is described by 30 fields. However, not all fields
+are directly relevant to make green actions reusable.
+After studying the spreadsheet, we excluded the fields
+that are considered irrelevant. For instance, some of the
+fields are filled in with company specific codes and no
+additional documentation is provided for understanding
+the codes; some of the fields are left empty; and some
+of the fields are meant for administrative purposes (e.g.
+field old measure code has been used to track back to
+historically used measurement).
+As a result, we found only 7 out of 30 fields useful for
+the codification. Among these 7 fields, 3 (Sub-category,
+short description, long description) have been mainly
+used to the mapping, while the other 4 (EIA-code,
+VAMIL, Branch, and type) helped us to understand the
+context and the meaning of a green action.
+3) Map the identified fields to the elements of the
+proposed model.
+Table I
+M AP THE MJA S PREADSHEET TO THE G REEN S TRATEGY M ODEL
+Green strategy model
+element
+Green Goal
+Green Action Name
+Green Action
+Description
+Action Effect
+Economic impact
+SubCategory
+Category
+
+MJA spreadsheet field
+Sub-category
+Short description
+Long description
+Long description,
+EIA-code, VAMIL
+Long description
+Branch and Type
+“green IT” or “greening
+of IT” based on our
+own interpretation
+
+When studying the MJA spreadsheet, we noticed that
+there is a common pattern between the spreadsheet and
+the green strategy model. Such pattern is presented in
+Table I, which we used to map the fields from the MJA
+spreadsheet to the elements of the green strategy model.
+The sub-category field of the MJA spreadsheet shows
+what the general achievements of green actions are and
+is consequently mapped to the green goal in the model.
+The short and long description fields of the MJA
+spreadsheet are the most descriptive ones. They are
+meant to describe in detail the green actions, from
+which we may derive green action name and green
+action description.
+In addition, the long description often includes information about environmental effects and sometimes
+
+also about economic impacts. By interpreting the information and making assumptions, we were able to
+elicit action effects and economic impacts (even if not
+explicitly stated).
+The fields VAMIL3 and EIA-code4 show the opportunities for tax reductions by applying a green action.
+When the values of these fields are present, we derived
+the action effect as “eligible for tax reduction” and
+economic impact as “savings due to tax reduction”.
+The fields branch and type express categories that are
+commonly used by data centers (e.g. cooling, management, design), which is naturally mapped to the subcategory element of our model.
+The element category has been filled by means of our
+own interpretation, so that we can use the distinction
+between greening of IT (i.e. the optimal use of IT to
+minimize environmental impact) and greening by IT
+(i.e. minimizing the environmental impact by using IT
+resources), two main roles that IT plays in achieving
+environmental goals [2], [14], [15].
+4) Codify the green actions.
+The previous three steps are meant to prepare the green
+actions provided as input to the case study. In this fourth
+step we carried out the actual codification of the 132
+green actions using our proposed model. To do so, we
+first studied the identified 7 fields of each green action;
+then elicited information relevant to each element of
+the green strategy model based on Table I; and finally
+filled in each element with the elicited information, our
+assumptions, and information that we concluded based
+on our interpretation and reasoning.
+B. An Example of a Codified Green Action
+In this section we present an example of the codification
+of green actions (the last step of the approach). A green
+action taken from the MJA spreadsheet is shown in Table II.
+As explained in our approach, we used a common pattern
+(see Table I) to codify the green actions. The green action
+name and the green action description are taken from the
+short and long descriptions, respectively. The contents of
+these two fields are in our opinion clear enough.
+In this example, action effect and economic impact were
+the most difficult ones to codify because there is almost no
+explicit description of the effects that may occur with this
+green action, and economic impact is fully missing.
+3 VAMIL is a scheme, promoted by the Funding Agency of the Dutch
+Ministry of Economic Affairs, Agriculture and Innovation. It grants tax
+reductions to companies for their investment in creating environmental
+optimizations.
+4 EIA (Energy Investment Allowance) is a program promoted by the
+Funding Agency of the Dutch Ministry of Economic Affairs, Agriculture
+and Innovation. It is meant for companies that invest in sustainable energy
+or in assets that save a certain amount of energy. This scheme offers
+entrepreneurs a direct financial advantage, because they can deduct an extra
+amount of 41,5% of the investment costs of these corporate assets from their
+profits.
+
+Nevertheless, we tried to understand the meaning of the
+green action and make some assumptions. The first sentence
+from the long description says “This UPS system does not
+need batteries attached.” From this sentence we deduced two
+action effects and their corresponding economic impact. One
+effect is that there is no need to buy batteries, hence reducing
+operational costs for keeping the system running. Another
+effect is that no battery disposal and recycle is needed and
+hence saving costs.
+
+Table II
+A N E XAMPLE OF A G REEN ACTION TAKEN F ROM THE MJA
+S PREADSHEET
+MJA
+field
+
+spreadsheet
+
+Sub-Category
+Short Description
+Long Description
+EIA-code
+VAMIL
+Branch
+Type
+
+Contents
+Energy saving projects in utilities and buildings
+Battery-free UPS system
+This UPS system does not need batteries attached. As compared to other battery systems,
+it can work with a wider temperature range.
+320000/420000
+none
+ICT/datacenter
+emergency power supply
+
+Table III
+A N E XAMPLE OF A C ODIFIED G REEN ACTION
+Model elements
+Green Goal
+Green Action Name
+Green Action
+Description
+Action Effect
+
+Economic impact
+
+Category
+SubCategory
+
+Contents
+Energy saving projects in utilities and
+buildings
+Battery-free UPS system
+This UPS system does not need batteries
+attached. As compared to other battery
+systems, it can work with a wider
+temperature range.
+1. No need to buy batteries.
+2. No battery disposal and recycle is needed
+and therefore it is environmentally friendly.
+3. Since the system can work with a wider
+temperature range, less cooling is needed.
+4. Eligible for EIA 320000/420000.
+1. Save operational costs for purchasing
+batteries.
+2. Save costs for disposal and recycling
+batteries.
+3. Save energy costs.
+4. Save operational costs due to tax
+reduction
+Greening of IT
+ICT/datacenter, emergency power supply
+
+The second sentence says “As compared to other battery
+systems, it can work with a wider temperature range.”
+We interpreted that free-battery UPS systems can tolerate
+higher temperature as compared to other battery systems,
+and therefore less cooling is needed. Therefore, we codified
+the third action effect as “less cooling is needed”. From this
+effect we assume that less cooling means either less cooling
+
+devices are needed or cooling devices may work less. In
+both cases less energy would be consumed and therefore
+we codified the economic impact as “Save energy costs.”
+Finally, the last action effect we elicited comes from the
+EIA-code. Because of the Energy Investment Allowance
+program5 , some energy investment may eligible for tax
+reduction. Therefore we codified the third action effect as
+“Eligible for EIA 320000/420000” which obviously leads
+to an economic impact “Savings costs due to tax reduction”.
+As for the category, we consider this measure being a
+”Green of IT” action, because it creates benefit by renewing
+equipment in IT, but there is no direct benefit for other
+sectors. Branch and Type in the MJA spreadsheet have been
+directly codified as Sub-category.
+In this way we were able to codify the green action using
+the green strategy model, which is presented in Table III.
+C. Findings
+The goal of our case study has been to challenge our green
+strategy model and find out its suitability in making explicit
+and aligning the economic impact of each green action
+and the corresponding environmental benefits. While none
+of the 132 MJA green actions did explicitly describe this
+alignment, during the codification we either had to elicit economic impact and environmental benefits embedded in the
+action description and then make their alignment explicit, or
+draw assumptions sometimes grounded in theory. Of course
+the latter case will need to be validated by interviewing
+domain experts who own the MJA green actions.
+In general, we have been able to represent all relevant
+fields in the original MJA spreadsheet with our model. This
+gives us confidence on its suitability in codifying green
+strategies. The next step, however, would be to go back
+to the companies, or involve other ones, to check if our
+way to align economic impact and environmental benefits is
+effective and sufficient to decide on the best fitting strategy.
+Further, the case study allowed us to collect the following
+additional observations on the codification as well as a list
+of issues that should lead to further improvements to our
+strategy model.
+•
+
+Advantages of codification:
+– The understandability of green actions is improved.
+As we mentioned earlier, the green actions provided
+to us were documented by domain experts who made
+assumptions that readers having sufficient background knowledge to understand. However, when
+shared with other data centers or presented to a third
+party (e.g. our university for research purposes), the
+documented green actions are often not completely
+understandable and less usable. By codifying the
+
+5 www.solarthermalworld.org/node/709
+
+•
+
+green actions, they are easier to be shared and communicated since assumptions and domain knowledge
+embedded in the descriptions become explicit. For
+instance, in our example discussed in Section III-B
+the consequences of using a battery-free UPS system
+are less clear to the reader before codification. Only
+after codification it is clear that from environmental
+perspective it would use less energy for cooling
+(lower carbon footprint) and it avoids disposal and
+recycling of batteries (less e-waste and less pollution
+to the environment), and from economic perspective
+it saves costs for energy consumption and saves costs
+for disposal and recycling. Knowing these consequences is essential for companies to understand and
+select the green action.
+– Searching and selecting green actions for specific
+purposes becomes easier.
+Very often, a company would search for green actions to achieve certain environmental goals, which
+is also the purpose of sharing green actions among
+multiple data centers under MJA agreement. When
+action effects and economical impacts are explicit,
+they can be used as criteria for companies to search
+for green actions that fulfill their business requirement. Further, explicit action effects and economical
+impacts may aid companies to justify and reason
+about the selection of certain green actions.
+– The completeness of the documentation of green
+actions is improved.
+The model encourages the author of a green action to
+document and, most importantly, to think about the
+environmental effects and economic impact that the
+green action may bring. In the future, when the green
+strategy model is commonly used for documenting
+green actions, the authors are guided with what type
+of critical information to provided. As a result, the
+chance that the documentation of green actions is
+complete is much higher.
+Issues for further improvement:
+– Dependences between green actions should be
+modeled.
+When codifying the green actions, we observed that
+some green actions are dependent or related to each
+other. For instance, one green action is to use adiabatic cooling, meaning that “as a complement to the
+direct free cooling we can evaporate water into the
+airflow to remove the heat in the air”. Another green
+action is described as “Moistening and drying air are
+expensive and energy intensive. Use equipment that
+operates between 20% and 80% of relative humidity.”
+The former action results in high humidity of the air;
+and the latter action proposes to use devices that may
+tolerate wider ranges of humidity so that no extra
+
+efforts are needed to moisten or dry air. Obviously,
+the latter action provides a solution for the problem
+that the former action introduces. If such relation is
+explicitly modeled, it is easier to justify the economic
+impact of both green actions as a whole.
+– Differentiation between positive and negative impacts should be supported.
+In the case study, we observed that each green action
+can have multiple economic impacts, which may be
+positive (i.e. contributing to reduce costs and increase
+benefits) and/or negative (i.e. require investments
+to put the actions in place). Currently, both of the
+two types of economic impacts are codified by one
+element (i.e. economic impact) without the discrimination of positive and negative effect. To assess the
+ROI of a strategy and align it to the organization
+business objectives is of course necessary to gain
+clear understanding of both positive and negative
+economic impacts. Therefore, in our opinion the discrimination of positive and negative impacts should
+be supported by the model.
+– References to the application of green actions
+should be included.
+We noticed in the MJA spreadsheet that sometimes
+reference documentation, a case of study or examples
+are given to show the application or usage of a green
+action. In our opinion, the information about the
+practice of a green action is very relevant to give
+the reader an instrument to get better understanding
+on a green action, and therefore, should be supported
+by the model.
+IV. C ONCLUSIONS
+To reduce energy costs and contribute to global environmental goals, organizations consider green strategies
+increasingly often. Sometimes they even add them as part
+of their organizational strategies. However, experience shows
+that if green strategies are not in line with business- and organization strategies they are easily neglected, or withdrawn
+in times of crisis.
+To aid organizations in the selection of green strategies
+and aligning them to their business strategies, in this paper
+we propose a green strategy model that codifies green
+strategies in such a way that the link between green goals,
+action effects, and economic impacts becomes explicit.
+In the discussed MJA case study we observed that codifying green actions do help in identifying economic impact and
+environmental effects, improve understandability, searchability, and encourage the authors to provide information that is
+critical for decision making. In addition to these advantages,
+we also observed that cross-dependencies between actions,
+and the differentiation between positive- and negative economic impact would be relevant but are not supported yet
+by our model.
+
+The ultimate goal of our research is to establish a green
+software knowledge base, which shares green metrics, policies, and best practices. This knowledge base will enable
+researchers and practitioners to exchange knowledge about
+green software accumulated from academia and industry.
+The work reported in this paper serves as foundation for
+the design and creation of such a knowledge base. We are
+currently working on eliciting metrics from case studies,
+and extend our model to relate action effects and economic
+impacts with metrics and key ecologic indicators that quantify/qualify the benefits of green actions, and ultimately the
+effectiveness of green strategies.
+
+[6] M. Talebi and T. Way, “Methods, metrics and motivation
+for a green computer science program,” SIGCSE Bull.,
+vol. 41, pp. 362–366, March 2009. [Online]. Available:
+http://doi.acm.org/10.1145/1539024.1508995
+[7] S.
+Murugesan,
+“Harnessing
+green
+IT:
+Principles and practices,” IT Professional, vol. 10,
+pp.
+24–33,
+January
+2008.
+[Online].
+Available:
+http://dl.acm.org/citation.cfm?id=1344234.1344284
+[8] S. E. Hanselman and M. Pegah, “The wild wild waste:
+e-waste,” in Proceedings of the 35th annual ACM SIGUCCS
+fall conference, ser. SIGUCCS ’07. New York, NY,
+USA: ACM, 2007, pp. 157–162. [Online]. Available:
+http://doi.acm.org/10.1145/1294046.1294083
+
+ACKNOWLEDGMENT
+Thanks go to Achraf Belmokadem for participating in the
+case study, and especially for the translation of the spreadsheet of green actions from Dutch to English. We would also
+like to thank Frank Hartkamp (program advisor Agentschap
+NL) for providing us access to the MJA spreadsheet. This
+study is carried out in the context of the Dutch Knowledge
+Network Green Software (http://kngs.wikidot.com).
+R EFERENCES
+[1] R. Harmon, H. Demirkan, N. Auseklis, and M. Reinoso,
+“From green computing to sustainable IT: Developing
+a sustainable service orientation,” in Proceedings of
+the 43rd Hawaii International Conference on System
+Sciences, ser. HICSS ’10. Washington, DC, USA: IEEE
+Computer Society, 2010, pp. 1–10. [Online]. Available:
+http://dx.doi.org/10.1109/HICSS.2010.214
+[2] E. Davidson, E. Vaast, and P. Wang, “The greening of
+IT: How discourse informs IT sustainability innovation,” in
+Conference on Commerce and Enterprise Computing (CEC).
+IEEE, 2011, pp. 421–427.
+[3] J. Harris, Green Computing and Green IT Best Practices
+on Regulations and Industry Initiatives, Virtualization, Power
+Management, Materials Recycling and Telecommuting. London, UK, UK: Emereo Pty Ltd, 2008.
+[4] P. Kurp, “Green computing,” Commun. ACM, vol. 51,
+pp.
+11–13,
+October
+2008.
+[Online].
+Available:
+http://doi.acm.org/10.1145/1400181.1400186
+[5] M. Kazandjieva, B. Heller, O. Gnawali, W. Hofer, and P. L. C.
+Kozyrakis, “Software or hardware: The future of green enterprise computing,” Stanford, Tech. Rep., 2011.
+
+[9] R. L. Mitchell, “Get up to speed on green IT,” Computerworld, Tech. Rep., 2008.
+[10] D. Daoud, “Beyond power: ITs roadmap to sustainable computing,” IDC Whitepaper, October 2008, daoud2008.
+[11] P. Lago and T. Jansen, “Creating environmental awareness
+in service oriented software engineering,” in ICSOC 2010
+Workshop on Services, Energy and Ecosystems, ser. LNCS,
+E. Maximilien, Ed., vol. 6568. Springer-Verlag, dec 2011,
+pp. 181–186.
+[12] E. Morrison, A. Ghose, H. Dam, K. Hinge, and K. HoeschKlohe, “Strategic alignment of business processes,” in the
+proceeding of the 7th international workshop on engineering
+service-oriented applications, 2011.
+[13] NL
+Agency,
+Ministry
+of
+Economic
+Affairs,
+Agricoltures
+and
+Innovation,
+“Eia.”
+[Online]. Available: http://www.agentschapnl.nl/nl/programmasregelingen/meerjarenafspraken-energie-efficiency
+[14] Y.-G. Cheong, Y.-J. Kim, S. Y. Yoo, H. Lee, S. Lee, S. C.
+Chae, and H.-J. Choi, “An ontology-based reasoning approach
+towards energy-aware smart homes,” in Consumer Communications and Networking Conference (CCNC). IEEE, Jan.
+2011, pp. 850–854.
+[15] J. K. Park, J. Y. Cho, Y. H. Shim, S. J. Kim, and B. G.
+Lee, “A proposed framework for improving IT utilization in
+the energy industry,” World Academy of Science, Engineering
+and Technology, vol. 58, 2009.
+
+

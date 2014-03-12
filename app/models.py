@@ -115,6 +115,12 @@ class Study(db.Model):
     university_id = db.Column(db.Integer, db.ForeignKey('university.id'))
     studyfield_id = db.Column(db.Integer, db.ForeignKey('studyfield.id'))
 
+    @staticmethod
+    def delete_study(study_id):
+        study = Study.query.get(study_id)
+        db.session.delete(study)
+        db.session.commit()
+
     def update(self, name, url, university_id, studyfield_id):
         self.name = name
         self.url = url
@@ -127,5 +133,15 @@ class StudyField(db.Model):
     __tablename__ = "studyfield"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-
     studies = db.relationship('Study', backref='studyfield', lazy='dynamic')
+
+    def update(self, name):
+        self.name = name
+        db.session.commit()
+
+    @staticmethod
+    def delete_studyfield(studyfield_id):
+        studyfield = StudyField.query.get(studyfield_id)
+        db.session.delete(studyfield)
+        db.session.commit()
+

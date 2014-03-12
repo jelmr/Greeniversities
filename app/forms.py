@@ -62,8 +62,12 @@ class LoginForm(Form):
 #==================================== STUDYFIELD ======================================#
 
 
+class AddStudyfieldForm(Form):
+    name = TextField('Name', validators=[Required()])
+
 
 #====================================== STUDY =========================================#
+
 
 class AddStudyForm(Form):
     name = TextField('Name', validators=[Required()])
