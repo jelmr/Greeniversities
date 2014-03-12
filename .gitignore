@@ -38,7 +38,6 @@ nosetests.xml
 flask/
 venv/
 app.db
-db_repository
 
 # IntelliJ
 .idea/
