@@ -40,18 +40,18 @@
 	<hr>
 
 	{% if  u.role == 2 %}
-		<legend>Studies</legend>
+		<legend>Studyfield</legend>
 		<div class="well well-sm">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong>Studies</strong>
-					<span class="pull-right"><a href="/add/university"><span class="glyphicon glyphicon-plus"></span> Add study</a></span>
+					<strong>Studyfield</strong>
+					<span class="pull-right"><a href="/add/studyfield"><span class="glyphicon glyphicon-plus"></span> Add studyfield</a></span>
 				</div>
 				<div class="panel-body">
 					<ul>
-						{% for study in study_fields %}
+						{% for studyfield in studyfields %}
 							<li>
-								<a href="{{ url_for('edit_university', university_id=1) }}">{{ study.name }}</a>
+								<a href="{{ url_for('edit_studyfield', studyfield_id=studyfield.id) }}">{{ studyfield.name }}</a>
 							</li>
 						{% endfor %}
 					</ul>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+	<legend>Add studyfield</legend>
+
+
+	<form method="post" action="" class="form-horizontal" role="form">
+		{{ form.hidden_tag() }}
+		{{ m.render_field(form.name, 4) }}
+
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-4">
+				<button type="submit" class="btn btn-primary col-sm-6">
+					<span class="glyphicon glyphicon-ok"></span>
+					Add studyfield
+				</button>
+			</div>
+		</div>
+
+
+	</form>
+
+
+
+
+
+
+
+
+	{{ super() }} <!-- Add flash messages -->
+{% endblock %}
