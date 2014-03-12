@@ -95,7 +95,7 @@ def add_university():
 
         description = form.description.data
         location = form.location.data
-        logo_url = form.url.data
+        logo_url = form.logo_url.data
 
         university = models.University(name=name, description=description, location=location, logo_url=logo_url)
         db.session.add(university)
