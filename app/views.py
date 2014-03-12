@@ -133,6 +133,7 @@ def edit_university(university_id):
 @flask_sijax.route(app, "/universities/<int:university_id>")
 def university(university_id=1):
     university = models.University.query.get(university_id)
+    studyfields = models.StudyField.query.all()
 
     if g.sijax.is_sijax_request:
         g.sijax.register_object(SijaxHandler)
@@ -141,10 +142,10 @@ def university(university_id=1):
     form = SubmitFeedbackForm()
 
     if form.validate_on_submit():
-        models.Feedback.save_feedback(form.name.data, form.feedback.data, 5, university_id)
+        models.Feedback.save_feedback(form.name.data, form.feedback.data, form.rating.data, university_id)
 
     return render_template("university.html", university=university, form=form, page_id="universities",
-                           title=university.name + " - Universities", u=g.user)
+                           title=university.name + " - Universities", u=g.user, studyfields=studyfields)
 
 
 ## DELETE UNIVERSITY
@@ -346,8 +347,8 @@ class SijaxHandler(object):
         obj_response.remove("#" + str(post_id))
 
     @staticmethod
-    def add_post(obj_response, name, message, university_id):
-        feedback = models.Feedback.save_feedback(name, message, 5, university_id)
+    def add_post(obj_response, name, message, rating, university_id):
+        feedback = models.Feedback.save_feedback(name, message, rating, university_id)
         obj_response.html_prepend("#posts", render_template("post.html", post=feedback, u=g.user))
         obj_response.script("$('#feedback_form')[0].reset();")
 

@@ -12,13 +12,12 @@
 
 
 
-		What studyfield are you intrested in?
+		<p>What studyfield are you intrested in?</p>
+		<ul>
 		{% for studyfield in studyfields %}
-			{{ studyfield.name }}
-			{% for study in studyfield.studies %}
-				{{ study.name }}
-			{% endfor %}
+			<li><a href="#">{{ studyfield.name }}</a></li>
 		{% endfor %}
+		</ul>
 
 	</div>
 

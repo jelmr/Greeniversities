@@ -1,6 +1,6 @@
 function submit_feedback_form(id, university_id) {
     var data = Sijax.getFormValues(id);
-    Sijax.request('add_post', [data.name, data.feedback, university_id]);
+    Sijax.request('add_post', [data.name, data.feedback, data.rating, university_id]);
 }
 
 function delete_feedback(id) {

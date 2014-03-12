@@ -9,6 +9,7 @@ from app import models
 
 class SubmitFeedbackForm(Form):
     name = TextField('Name', validators=[Required()])
+    rating = IntegerField('Rating', validators=[Required()])
     feedback = TextAreaField('Feedback', validators=[Required()])
 
 #==================================== UNIVERSITY ======================================#

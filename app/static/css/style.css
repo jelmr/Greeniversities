@@ -167,8 +167,12 @@ h4 {
   border-top-right-radius: 0px;
   width: 120px;
   float: left;
-  height: 100%;
+  height: 120px;
   margin-right: 10px;
+}
+#uni-list .university .uni-thumbnail {
+  height: 100%;
+  border-radius: 3px;
 }
 #uni-list .university .text {
   margin-left: 120px;

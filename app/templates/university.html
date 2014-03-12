@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block maincontent %}
 
-	<legend><span class="university-title">{{ university.name }}</span> </legend>
-	{%  if university.logo_url %}
+	<legend><span class="university-title">{{ university.name }}</span></legend>
+	{% if university.logo_url %}
 		<img class="pull-left uni-logo" width="300px" src="{{ university.logo_url }}">
 	{% endif %}
 
 
 	<h3>Scores</h3>
 	<dl class="dl-horizontal" style="display: inline-block;">
-		<dt>Overal score</dt><dd>89%</dd>
-		<dt>Paper score</dt><dd>66% </dd>
-		<dt>User score</dt><dd>70%</dd>
-		<dt>Sustainabul ranking</dt><dd>17 / 23</dd>
+		<dt>Overal score</dt>
+		<dd>89%</dd>
+		<dt>Paper score</dt>
+		<dd>66%</dd>
+		<dt>User score</dt>
+		<dd>70%</dd>
+		<dt>Sustainabul ranking</dt>
+		<dd>17 / 23</dd>
 	</dl>
 
 	<h3>Description</h3>
@@ -21,11 +25,39 @@
 	<div class="clearfix"></div>
 	<h3> Studies</h3>
 	This university offers the following studies:
-	<ul>
-		{% for study in university.studies %}
-			<li><a href="{{ study.url }}">{{ study.name }}</a></li>
+
+
+	<div class="panel-group" id="accordion" >
+
+		{% for studyfield in studyfields %}
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">
+							{{ studyfield.name }}
+						</a>
+					</h4>
+				</div>
+				<div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+					<div class="panel-body">
+
+						<ul>
+							{% for study in university.studies %}
+								{% if study.studyfield.id == studyfield.id %}
+									<li><a href="{{ study.url }}">{{ study.name }}</a></li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+
+					</div>
+				</div>
+			</div>
 		{% endfor %}
-	</ul>
+
+
+	</div>
+
+	<hr>
 	<div class="clearfix"></div>
 	<h3>Feedback</h3>
 
@@ -41,8 +73,12 @@
 		<legend>Submit feedback</legend>
 
 		<p>{{ form.hidden_tag() }}</p>
+
 		<p>{{ m.render_field_reg(form.name,3) }}</p>
+
 		<p>{{ m.render_field_reg(form.feedback,4, rows=4) }}</p>
+
+		<p>{{ m.render_field_reg(form.rating,4) }}</p>
 
 
 		<input id="submit_feedback" class="left clear" type="submit"
