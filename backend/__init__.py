@@ -13,6 +13,4 @@ api.add_resource(UniversityScore, '/university/<int:university_id>')
 app.config.from_object('config')
 logging.basicConfig(level=logging.DEBUG)
 
-## SQL ALCHEMY
-db = SQLAlchemy(app)
 

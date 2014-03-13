@@ -9,14 +9,20 @@
 
 	<h3>Scores</h3>
 	<dl class="dl-horizontal" style="display: inline-block;">
-		<dt>Overal score</dt>
-		<dd>89%</dd>
-		<dt>Paper score</dt>
-		<dd>66%</dd>
-		<dt>User score</dt>
-		<dd>70%</dd>
-		<dt>Sustainabul ranking</dt>
-		<dd>17 / 23</dd>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+$(document).ready(function() {
+    $.ajax({
+        url: "/api/university/{{ university.id }}"
+    }).then(function(data) {
+        $('#greenscore').text(data.score*10+"%")
+    });
+});
+        </script>
+		<dt>Overal score</dt><dd id="greenscore">89%</dd>
+		<dt>Paper score</dt><dd>66% </dd>
+		<dt>User score</dt><dd>70%</dd>
+		<dt>Sustainabul ranking</dt><dd>17 / 23</dd>
 	</dl>
 
 	<h3>Description</h3>
