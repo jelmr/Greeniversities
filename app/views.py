@@ -17,6 +17,15 @@ def home():
     studyfields = models.StudyField.query.all()
     return render_template('index.html', page_id="home", title="Home", u=g.user, studyfields=studyfields)
 
+#======================================== STUDYFIELD ========================================#
+
+## HOME
+@flask_sijax.route(app, "/studyfield/<int:field_id>")
+def studyfield(field_id):
+    studyfield = models.StudyField.query.get(field_id)
+    studies = models.Study.query.filter_by(studyfield=studyfield)
+    studies.order_by(models.University.name)
+    return render_template('studyfield.html', page_id="home", title="Home", u=g.user, studies=studies)
 #======================================== ADMIN =======================================#
 
 ## ADMIN PAGE

@@ -15,7 +15,7 @@
 		<p>What study field are you interested in?</p>
 		<ul>
 		{% for studyfield in studyfields %}
-			<li><a href="#">{{ studyfield.name }}</a></li>
+        <li><a href="/studyfield/{{studyfield.id}}">{{ studyfield.name }}</a></li>
 		{% endfor %}
 		</ul>
 

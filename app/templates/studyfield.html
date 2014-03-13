@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block maincontent %}
+
+
+
+
+
+	{{ super() }} <!-- Add flash messages -->
+
+	<div class="jumbotron">
+		<h2>Here are some studies that might interest you:</h2>
+
+
+
+		<ul>
+		{% for study in studies %}
+        <li>{{study.university.name}} - <a href="#">{{ study.name }}</a></li>
+		{% endfor %}
+		</ul>
+
+	</div>
+
+
+{% endblock %}
