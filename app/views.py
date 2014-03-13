@@ -262,6 +262,7 @@ def edit_studyfield(studyfield_id):
 
     form = AddStudyfieldForm()
     studyfield = models.StudyField.query.get(studyfield_id)
+    studies = models.Study.query.all()
 
     if form.validate_on_submit():
         name = form.name.data
@@ -270,7 +271,7 @@ def edit_studyfield(studyfield_id):
         flash("The studyfield %r has been updated!" % str(name), "success")
         return redirect(url_for('admin'))
 
-    return render_template("edit_studyfield.html", studyfield=studyfield, page_id="admin", title="Edit studyfield", form=form, u=g.user)
+    return render_template("edit_studyfield.html", studyfield=studyfield, studies=studies, page_id="admin", title="Edit studyfield", form=form, u=g.user)
 
 ## DELETE STUDYFIELD
 @flask_sijax.route(app, "/delete/studyfield/<int:studyfield_id>")
@@ -289,12 +290,12 @@ def delete_studyfield(studyfield_id):
 @login_required
 def add_study(university_id):
     form = AddStudyForm()
+    studyfields = models.StudyField.query.all()
 
     if form.validate_on_submit():
         name = form.name.data
         url = form.url.data
         studyfield_id = form.studyfield_id.data
-
         studyfield = models.StudyField.query.get(studyfield_id)
         university = models.University.query.get(university_id)
 
@@ -302,9 +303,9 @@ def add_study(university_id):
         db.session.add(study)
         db.session.commit()
         flash("The study %r has been created!" % str(name), "success")
-        return redirect(url_for('admin'))
+        return redirect(url_for('edit_university', university_id=university_id))
 
-    return render_template("add_study.html", page_id="admin", title="Add study", form=form, u=g.user)
+    return render_template("add_study.html", page_id="admin", title="Add study", studyfields=studyfields, form=form, u=g.user)
 
 ## EDIT STUDY
 @flask_sijax.route(app, "/edit/study/<int:study_id>")
@@ -313,6 +314,7 @@ def edit_study(study_id):
 
     form = AddStudyForm()
     study = models.Study.query.get(study_id)
+    studyfields = models.StudyField.query.all()
 
     if form.validate_on_submit():
         name = form.name.data
@@ -324,17 +326,18 @@ def edit_study(study_id):
         flash("The study %r has been updated!" % str(name), "success")
         return redirect(url_for('edit_university', university_id=study.university_id))
 
-    return render_template("edit_study.html", study=study, page_id="admin", title="Edit study", form=form, u=g.user)
+    return render_template("edit_study.html", study=study, page_id="admin", studyfields=studyfields, title="Edit study", form=form, u=g.user)
 
 ## DELETE STUDYFIELD
 @flask_sijax.route(app, "/delete/study/<int:study_id>")
 @login_required
 def delete_study(study_id):
     if g.user.role == models.ROLE_ADMIN:
+        study = models.Study.query.get(study_id)
         models.Study.delete_study(study_id)
     else:
         flash("Unauthorized access.", "danger")
-    return redirect(url_for('admin'))
+    return redirect(url_for('edit_university', university_id=study.university_id))
 
 
 #======================================= SIJAX ========================================#

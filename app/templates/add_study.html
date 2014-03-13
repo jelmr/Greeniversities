@@ -21,6 +21,27 @@
 		</div>
 
 
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Studies</label>
+
+			<div class="col-sm-4">
+				<table id="study-table" class="table table-striped">
+					<tr>
+						<th>Study field</th>
+						<th>id</th>
+					</tr>
+					{% for studyfield in studyfields %}
+						<tr>
+							<td>{{ studyfield.name }}</td>
+							<td>{{ studyfield.id }}</td>
+						</tr>
+
+					{% endfor %}
+
+				</table>
+
+			</div>
+		</div>
 	</form>
 
 

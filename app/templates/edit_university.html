@@ -14,38 +14,43 @@
 
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Studies</label>
-			<table id="study-table" class="table table-striped" style="width:400px;">
-			<tr>
-				<th>Study name</th>
-				<th>Studyfield</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-				{% for study in university.studies %}
+
+			<div class="col-sm-6">
+				<table id="study-table" class="table table-striped">
 					<tr>
-						<td>{{ study.name }}</td>
-						<td>{{ study.studyfield.name }}</td>
-						<td><a href="{{ url_for('edit_study', study_id=study.id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a href="{{ url_for('edit_study', study_id=study.id) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+						<th>Study name</th>
+						<th>Studyfield</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
-				{% endfor %}
-			<tr>
-				<td colspan="4"><a href="{{ url_for('add_study', university_id=university.id) }}"><span class="glyphicon glyphicon-trash"></span>Add</a></td>
-			</tr>
+					{% for study in university.studies %}
+						<tr>
+							<td>{{ study.name }}</td>
+							<td>{{ study.studyfield.name }}</td>
+							<td><a href="{{ url_for('edit_study', study_id=study.id) }}"><span
+									class="glyphicon glyphicon-edit"></span></a></td>
+							<td><a href="{{ url_for('delete_study', study_id=study.id) }}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+						</tr>
+					{% endfor %}
+					<tr>
+						<td colspan="4" class="text-center"><a href="{{ url_for('add_study', university_id=university.id) }}"><span
+								class="glyphicon glyphicon-trash"></span>Add</a></td>
+					</tr>
 
-			</table>
+				</table>
+			</div>
 		</div>
-
 
 
 		<div class="form-group">
-		<div class="col-sm-offset-3 col-sm-4">
-			<button type="submit" class="btn btn-primary col-sm-6">
-				<span class="glyphicon glyphicon-ok"></span>
-				Save changes
-			</button>
+			<div class="col-sm-offset-3 col-sm-4">
+				<button type="submit" class="btn btn-primary col-sm-6">
+					<span class="glyphicon glyphicon-ok"></span>
+					Save changes
+				</button>
+			</div>
 		</div>
-	</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-4">

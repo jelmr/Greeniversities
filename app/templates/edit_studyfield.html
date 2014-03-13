@@ -2,18 +2,50 @@
 {% block maincontent %}
 
 
-	<legend>Edit studyfield</legend>
+	<legend>Edit study field</legend>
 
 
 	<form method="post" action="" class="form-horizontal" role="form">
 		{{ form.hidden_tag() }}
 		{{ m.render_field(form.name, 4, value=studyfield.name) }}
 
+
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Studies</label>
+
+			<div class="clearfix"></div>
+			<div class="col-sm-offset-3 col-sm-6">
+				<table id="study-table" class="table table-striped">
+					<tr>
+						<th>Study name</th>
+						<th>Studyfield</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					{% for study in studies %}
+						{% if study.studyfield.id == studyfield.id %}
+							<tr>
+								<td>{{ study.name }}</td>
+								<td>{{ study.studyfield.name }}</td>
+								<td><a href="{{ url_for('edit_study', study_id=study.id) }}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+								<td><a href="{{ url_for('edit_study', study_id=study.id) }}"><span
+										class="glyphicon glyphicon-trash"></span></a></td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+
+
+				</table>
+			</div>
+		</div>
+
+
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-4">
 				<button type="submit" class="btn btn-primary col-sm-6">
 					<span class="glyphicon glyphicon-ok"></span>
-					Edit studyfield
+					Edit study field
 				</button>
 			</div>
 		</div>
@@ -23,7 +55,7 @@
 				<a href="{{ url_for('delete_studyfield', studyfield_id=studyfield.id) }}">
 					<button type="button" class="btn btn-danger col-sm-6">
 						<span class="glyphicon glyphicon-trash"></span>
-						Remove studyfield
+						Remove study field
 					</button>
 				</a>
 			</div>
